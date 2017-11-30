@@ -1,64 +1,32 @@
 <html>
-	
-	<head>
-	  <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
-	  <script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v3.12.4/dist/aframe-extras.min.js"></script>
-	  <script src="https://unpkg.com/aframe-html-shader@0.2.0/dist/aframe-html-shader.min.js"></script>
-	  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
-	  <script src="easyrtc/easyrtc.js"></script>
-	  
-	</head>
-	
-	<body>
-	  <a-scene inspector="url: https://aframe.io/releases/0.3.0/aframe-inspector.min.js">
+
+<head>
+	<script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
+	<script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v3.12.4/dist/aframe-extras.min.js"></script>
+	<script src="https://unpkg.com/aframe-html-shader@0.2.0/dist/aframe-html-shader.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
+	<script src="easyrtc/easyrtc.js"></script>
+	<script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
+
+	<!-- self implemented content -->
+	<script src="resources/js/pdf-loader.js"></script>
+</head>
+
+<body>
+	<a-scene inspector="url: https://aframe.io/releases/0.3.0/aframe-inspector.min.js">
 		<a-entity camera="userHeight: 1.6" wasd-controls look-controls position="0 0 10"></a-entity>
 		<a-entity gltf-model=" url(resources/models/apartment/scene.gltf);" position="0 0 0"></a-entity>
-		<a-entity material="shader: html; target: #htmlElement;fps:0.5;" position="-8.1 4.64 -6.7" rotation="0 45.836623610465864 0" scale="1 1 1" visible="true" id="WhiteBoard" mixin="null" geometry="height:4.56;width:8.74;primitive:plane"></a-entity>
-	  </a-scene>
-	  <!-- Div for pdf rendering-->
-	  <div style="width: 100%; height: 100%; position: fixed; left: 0; top: 0; z-index: -1; overflow: hidden;   text-align: center ">
-		 <div id="htmlElement" style="background: rgba(198, 225, 240, 0.212); color: #333; font-size: 48px">
-		<script type="text/javascript" src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
-		<canvas id="the-canvas"></canvas>
-		<script type="text/javascript">
-			// URL of PDF document
-			var url = "resources/pdf/143-1-611-1-10-20080609.pdf";
-	
-			// Asynchronous download PDF
-			PDFJS.getDocument(url)
-		  .then(function(pdf) {
-			return pdf.getPage(1);
-		  })
-		  .then(function(page) {
-			// Set scale (zoom) level
-			var scale = 1.5;
-	
-			// Get viewport (dimensions)
-			var viewport = page.getViewport(scale);
-	
-			// Get canvas#the-canvas
-			var canvas = document.getElementById('the-canvas');
-	
-			// Fetch canvas' 2d context
-			var context = canvas.getContext('2d');
-	
-			// Set dimensions to Canvas
-			canvas.height = viewport.height;
-			canvas.width = viewport.width;
-	
-			// Prepare object needed by render method
-			var renderContext = {
-			  canvasContext: context,
-			  viewport: viewport
-			};
-	
-			// Render PDF page
-			page.render(renderContext);
-		  });
-		</script>
+		<a-entity material="shader: html; target: #htmlElement;fps:0.5;" position="-8.1 4.64 -6.7" rotation="0 45.836623610465864 0"
+		 scale="1 1 1" visible="true" id="WhiteBoard" mixin="null" geometry="height:4.56;width:8.74;primitive:plane"></a-entity>
+	</a-scene>
+	<!-- Div for pdf rendering-->
+	<div style="width: 100%; height: 100%; position: fixed; left: 0; top: 0; z-index: -1; overflow: hidden;   text-align: center ">
+		<!-- this element is referenced by the html shader. All its content will be visible in scene -->
+		<div id="htmlElement" style="background: rgba(198, 225, 240, 0.212); color: #333; font-size: 48px">
+			<!-- this canves is used to render the pdf content -->
+			<canvas id="the-canvas"></canvas>
 		</div>
-	  </div>
-	</body>
-	
-	</html>
-	
+	</div>
+</body>
+
+</html>
