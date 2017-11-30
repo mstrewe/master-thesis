@@ -1,5 +1,5 @@
 module.exports = {
-    handleRequest : function (req, res, next) {
+    handleRequest: function (req, res, next) {
 
     }
 };

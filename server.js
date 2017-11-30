@@ -15,10 +15,10 @@ var serveModels = serveStatic('resources/models', {
 var servePdf = serveStatic('resources/pdf', {
     'index': false
 });
-var serveIndex = serveStatic('resources/html',{
+var serveIndex = serveStatic('resources/html', {
     'index': ['index.html']
 });
-var serveJS = serveStatic('resources/js',{
+var serveJS = serveStatic('resources/js', {
     'index': false
 });
 
@@ -35,7 +35,7 @@ app.use('/api', apiMiddleWare.handleRequest);
 app.use('/easyrtc', serveEasyRTC);
 app.use('/resources/models', serveModels);
 app.use('/resources/pdf', servePdf);
-app.use('/resources/js',serveJS);
-app.use('/',serveIndex);
+app.use('/resources/js', serveJS);
+app.use('/', serveIndex);
 //create node.js http server and listen on port
 http.createServer(app).listen(8000);
