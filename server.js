@@ -6,7 +6,7 @@ var compression = require('compression');
 var serveStatic = require('serve-static');
 //easyrtc components
 var easyrtc = require('easyrtc');
-var socketIo = require("socket.io");  
+var socketIo = require("socket.io");
 var express = require("express");
 
 // create route handlers
