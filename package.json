@@ -15,6 +15,9 @@
         "compression": "1.7.1",
         "cookie-session": "2.0.0-beta.3",
         "body-parser": "1.18.2",
-        "serve-static": "1.13.1"
+        "serve-static": "1.13.1",
+        "easyrtc":"1.1.0",
+        "socket.io":"2.0.4",
+        "express":"4.16.2"
     }
 }
