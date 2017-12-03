@@ -5,7 +5,7 @@ var apiMiddleWare = require('./src/api-middleware.js');
 var compression = require('compression');
 var serveStatic = require('serve-static')
 
-
+// create route handlers
 var serveEasyRTC = serveStatic('easyrtc', {
     'index': false
 });
@@ -22,6 +22,7 @@ var serveJS = serveStatic('resources/js', {
     'index': false
 });
 
+//create webserver
 var app = connect();
 app.use(compression());
 
@@ -31,11 +32,13 @@ app.use(cookieSession({
     keys: ['secret1', 'secret2']
 }));
 
+//register route handlers
 app.use('/api', apiMiddleWare.handleRequest);
 app.use('/easyrtc', serveEasyRTC);
 app.use('/resources/models', serveModels);
 app.use('/resources/pdf', servePdf);
 app.use('/resources/js', serveJS);
 app.use('/', serveIndex);
+
 //create node.js http server and listen on port
 http.createServer(app).listen(8000);
