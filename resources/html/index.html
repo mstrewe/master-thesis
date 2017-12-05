@@ -19,8 +19,7 @@
 	debug: true;
 	adapter: easyrtc;
 	audio : false;
-	serverURL: http://localhost:8080/;
-" inspector="url: https://aframe.io/releases/0.3.0/aframe-inspector.min.js">
+	serverURL: http://localhost:8080/;" inspector="url: https://aframe.io/releases/0.3.0/aframe-inspector.min.js">
 		<!-- asset definitons -->
 		<a-assets>
 			<script id="avatar-template" type="text/html">
@@ -29,26 +28,26 @@
 		</a-assets>
 
 		<a-entity id="player" networked="template:#avatar-template;showLocalTemplate:false;" camera wasd-controls look-controls position="0 2 0">
-				<a-entity cursor="fuse: true; fuseTimeout: 500"
-				position="0 0 -1"
-				geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
-				material="color: black; shader: flat">
-				<a-animation begin="click" easing="ease-in" attribute="scale" dur="150"
-               fill="forwards" from="0.1 0.1 0.1" to="1 1 1"></a-animation>
-				<a-animation begin="cursor-fusing" easing="ease-in" attribute="scale" dur="1500"
-               fill="backwards" from="1 1 1" to="0.1 0.1 0.1"></a-animation>
+			<a-entity cursor="fuse: true; fuseTimeout: 500" position="0 0 -1" geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
+			 material="color: black; shader: flat">
+				<a-animation begin="click" easing="ease-in" attribute="scale" dur="150" fill="forwards" from="0.1 0.1 0.1" to="1 1 1"></a-animation>
+				<a-animation begin="cursor-fusing" easing="ease-in" attribute="scale" dur="1500" fill="backwards" from="1 1 1" to="0.1 0.1 0.1"></a-animation>
 			</a-entity>
 		</a-entity>
 		<a-entity gltf-model=" url(resources/models/apartment/scene.gltf);" position="0 0 0"></a-entity>
-		<a-entity material="shader: html; target: #htmlElement;fps:0.5;" position="-8.1 4.64 -6.7" rotation="0 45.836623610465864 0"
+		<a-entity material="shader: html; target: #htmlElement;fps:2;" position="-8.1 4.64 -6.7" rotation="0 45.836623610465864 0"
 		 scale="1 1 1" visible="true" id="WhiteBoard" mixin="null" geometry="height:4.56;width:8.74;primitive:plane"></a-entity>
-		 <a-entity position="-5.42 4.78 -9.23" rotation="0 45 0" scale="1 1 1" visible="true" id="pdf_next_page" material="color:#80ff00" geometry="primitive:plane"></a-entity>
-		 <a-entity position="-10.33 4.78 -4.32" rotation="0 45 0" scale="1 1 1" visible="true" id="pdf_previus_page" material="color:#80ff00" geometry="primitive:plane"></a-entity>
-		 <a-entity position="-4.35 0.76 3.19" rotation="270 3.1799999999999997 0" scale="0.5 0.5 1" visible="true" id="pdf1" geometry="primitive:plane" material=""></a-entity>
-		 <a-entity position="-4.35 0.76 3.99" rotation="270 3.1799999999999997 0" scale="0.5 0.5 1" visible="true" id="pdf2" geometry="primitive:plane" material=""></a-entity>
-		</a-scene>
+		<a-entity position="-5.09 4.78 -9.56" rotation="0 45 0" scale="1 1 1" visible="true" id="pdf_next_page" material="color:#80ff00"
+		 geometry="primitive:plane"></a-entity>
+		<a-entity position="-11.09 4.78 -3.56" rotation="0 45 0" scale="1 1 1" visible="true" id="pdf_previus_page" material="color:#80ff00"
+		 geometry="primitive:plane"></a-entity>
+		<a-entity position="-4.35 0.76 3.19" rotation="270 3.1799999999999997 0" scale="0.5 0.5 1" visible="true" id="pdf1" geometry="primitive:plane"
+		 material=""></a-entity>
+		<a-entity position="-4.35 0.76 3.99" rotation="270 3.1799999999999997 0" scale="0.5 0.5 1" visible="true" id="pdf2" geometry="primitive:plane"
+		 material=""></a-entity>
+	</a-scene>
 	<!-- Div for pdf rendering-->
-	<div style="width: 100%; height: 100%; position: fixed; left: 0; top: 0; z-index: -1; overflow: hidden;   text-align: center ">
+	<div style="width: 1920px; height: 1080px; position: fixed; left: 0; top: 0; z-index: -1; overflow: hidden;   text-align: center ">
 		<!-- this element is referenced by the html shader. All its content will be visible in scene -->
 		<div id="htmlElement" style="background: rgba(198, 225, 240, 0.212); color: #333; font-size: 48px">
 			<!-- this canves is used to render the pdf content -->

@@ -42,61 +42,69 @@ var pdfLoader =
 
 
         nextPage: function () {
-            var page = pdfLoader.documentCache.pdf.getPage(pdfLoader.documentCache.page + 1);
-            // Set scale (zoom) level
-            var scale = 1.5;
+            pdfLoader.documentCache.pdf.getPage(pdfLoader.documentCache.page + 1).then(function (page) {
+                //increment page in cache
+                pdfLoader.documentCache.page++;
 
-            // Get viewport (dimensions)
-            var viewport = page.getViewport(scale);
+                // Set scale (zoom) level
+                var scale = 1.5;
 
-            // Get canvas#the-canvas
-            var canvas = document.getElementById('the-canvas');
+                // Get viewport (dimensions)
+                var viewport = page.getViewport(scale);
 
-            // Fetch canvas' 2d context
-            var context = canvas.getContext('2d');
+                // Get canvas#the-canvas
+                var canvas = document.getElementById('the-canvas');
 
-            // Set dimensions to Canvas
-            canvas.height = viewport.height;
-            canvas.width = viewport.width;
+                // Fetch canvas' 2d context
+                var context = canvas.getContext('2d');
 
-            // Prepare object needed by render method
-            var renderContext = {
-                canvasContext: context,
-                viewport: viewport
-            };
+                // Set dimensions to Canvas
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
 
-            // Render PDF page
-            page.render(renderContext);
+                // Prepare object needed by render method
+                var renderContext = {
+                    canvasContext: context,
+                    viewport: viewport
+                };
+
+                // Render PDF page
+                page.render(renderContext);
+            });
         },
 
         previusPage: function () {
             if (pdfLoader.documentCache.page - 1 === 0)
                 return;
-            var page = documentCache.pdf.getPage(pdfLoader.documentCache.page - 1);
-            // Set scale (zoom) level
-            var scale = 1.5;
+            pdfLoader.documentCache.pdf.getPage(pdfLoader.documentCache.page - 1).then(function (page) {
+                // decrement page in cache
+                pdfLoader.documentCache.page--;
 
-            // Get viewport (dimensions)
-            var viewport = page.getViewport(scale);
+                // Set scale (zoom) level
+                var scale = 1.5;
 
-            // Get canvas#the-canvas
-            var canvas = document.getElementById('the-canvas');
+                // Get viewport (dimensions)
+                var viewport = page.getViewport(scale);
 
-            // Fetch canvas' 2d context
-            var context = canvas.getContext('2d');
+                // Get canvas#the-canvas
+                var canvas = document.getElementById('the-canvas');
 
-            // Set dimensions to Canvas
-            canvas.height = viewport.height;
-            canvas.width = viewport.width;
+                // Fetch canvas' 2d context
+                var context = canvas.getContext('2d');
 
-            // Prepare object needed by render method
-            var renderContext = {
-                canvasContext: context,
-                viewport: viewport
-            };
+                // Set dimensions to Canvas
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
 
-            // Render PDF page
-            page.render(renderContext);
+                // Prepare object needed by render method
+                var renderContext = {
+                    canvasContext: context,
+                    viewport: viewport
+                };
+
+                // Render PDF page
+                page.render(renderContext);
+            });
         }
     };
 
