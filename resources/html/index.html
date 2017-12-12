@@ -12,6 +12,35 @@
 	<!-- self implemented content -->
 	<script src="resources/js/pdf-loader.js"></script>
 	<script src="resources/js/custom-components/static-sync.js"></script>
+	<script text="html">
+		AFRAME.registerComponent('spawn-in-circle', {
+			schema: {
+				radius: { type: 'number', default: 1 }
+			},
+
+			init: function () {
+				var el = this.el;
+				var center = el.getAttribute('position');
+
+				var angleRad = this.getRandomAngleInRadians();
+				var circlePoint = this.randomPointOnCircle(this.data.radius, angleRad);
+				var worldPoint = { x: circlePoint.x + center.x, y: center.y, z: circlePoint.y + center.z };
+				el.setAttribute('position', worldPoint);
+
+
+			},
+
+			getRandomAngleInRadians: function () {
+				return Math.random() * Math.PI * 2;
+			},
+
+			randomPointOnCircle: function (radius, angleRad) {
+				var x = Math.cos(angleRad) * radius;
+				var y = Math.sin(angleRad) * radius;
+				return { x: x, y: y };
+			}
+		});
+	</script>
 </head>
 
 <body>
@@ -24,15 +53,22 @@
 		<!-- asset definitons -->
 		<a-assets>
 			<script id="avatar-template" type="text/html">
-					<a-entity gltf-model="url(resources/models/humans/m1.glb);"networked-audio-source rotation="0 180 0" position="0 -2 0" scale="1.5 1.5 1.5"></a-entity>
+					<a-entity class="torso" gltf-model="url(resources/models/humans/m3_torso.glb);"networked-audio-source rotation="0 180 0" position="0 -2 0" scale="1.5 1.5 1.5">
+					</a-entity>
+				</script>
+			<script id="avatar-head-template" type="text/html">
+					<a-entity class="head" gltf-model="url(resources/models/humans/m3_head.glb);" rotation="0 180 0" scale="0.13 0.13 0.13">
+					</a-entity>
 			</script>
 		</a-assets>
 
-		<a-entity id="player" networked="template:#avatar-template;showLocalTemplate:false;" camera wasd-controls look-controls position="0 2 0">
-			<a-entity cursor="fuse: true; fuseTimeout: 500" position="0 0 -1" geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
-			 material="color: black; shader: flat">
-				<a-animation begin="click" easing="ease-in" attribute="scale" dur="150" fill="forwards" from="0.1 0.1 0.1" to="1 1 1"></a-animation>
-				<a-animation begin="cursor-fusing" easing="ease-in" attribute="scale" dur="1500" fill="backwards" from="1 1 1" to="0.1 0.1 0.1"></a-animation>
+		<a-entity id="player" spawn-in-circle networked="template:#avatar-template;showLocalTemplate:false;" position="0 2 0" wasd-controls>
+			<a-entity id="players-head" camera look-controls networked="template:#avatar-head-template;showLocalTemplate:false" position="0 0.39 0">
+				<a-entity cursor="fuse: true; fuseTimeout: 500" position="0 0 -1" geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
+				 material="color: black; shader: flat">
+					<a-animation begin="click" easing="ease-in" attribute="scale" dur="150" fill="forwards" from="0.1 0.1 0.1" to="1 1 1"></a-animation>
+					<a-animation begin="cursor-fusing" easing="ease-in" attribute="scale" dur="1500" fill="backwards" from="1 1 1" to="0.1 0.1 0.1"></a-animation>
+				</a-entity>
 			</a-entity>
 		</a-entity>
 		<a-entity gltf-model=" url(resources/models/apartment/scene.gltf);" position="0 0 0"></a-entity>
