@@ -11,7 +11,7 @@
 
 	<!-- self implemented content -->
 	<script src="resources/js/pdf-loader.js"></script>
-	<script src="resources/js/custom-components/static-sync.js"></script>
+	<script src="resources/js/custom-components/event-sync.js"></script>
 	<script text="html">
 		AFRAME.registerComponent('spawn-in-circle', {
 			schema: {
@@ -74,13 +74,13 @@
 		<a-entity gltf-model=" url(resources/models/apartment/scene.gltf);" position="0 0 0"></a-entity>
 		<a-entity static-sync material="shader: html; target: #htmlElement;fps:2;" position="-8.1 4.64 -6.7" rotation="0 45.836623610465864 0"
 		 scale="1 1 1" visible="true" id="WhiteBoard" mixin="null" geometry="height:4.56;width:8.74;primitive:plane"></a-entity>
-		<a-entity position="-5.09 4.78 -9.56" rotation="0 45 0" scale="1 1 1" visible="true" id="pdf_next_page" material="color:#80ff00"
+		<a-entity event-sync position="-4.17 4.78 -7.69" rotation="0 45 0" scale="1 1 1" visible="true" id="pdf_next_page" material="color:#80ff00"
 		 geometry="primitive:plane"></a-entity>
-		<a-entity position="-11.09 4.78 -3.56" rotation="0 45 0" scale="1 1 1" visible="true" id="pdf_previus_page" material="color:#80ff00"
+		<a-entity event-sync position="-8.92 4.78 -2.54" rotation="0 45 0" scale="1 1 1" visible="true" id="pdf_previus_page" material="color:#80ff00"
 		 geometry="primitive:plane"></a-entity>
-		<a-entity position="-4.35 0.76 3.19" rotation="270 3.1799999999999997 0" scale="0.5 0.5 1" visible="true" id="pdf1" geometry="primitive:plane"
+		<a-entity event-sync position="-4.35 0.76 3.19" rotation="270 3.1799999999999997 0" scale="0.5 0.5 1" visible="true" id="pdf1" geometry="primitive:plane"
 		 material=""></a-entity>
-		<a-entity position="-4.35 0.76 3.99" rotation="270 3.1799999999999997 0" scale="0.5 0.5 1" visible="true" id="pdf2" geometry="primitive:plane"
+		<a-entity event-sync position="-4.35 0.76 3.99" rotation="270 3.1799999999999997 0" scale="0.5 0.5 1" visible="true" id="pdf2" geometry="primitive:plane"
 		 material=""></a-entity>
 		<!-- Div for pdf rendering-->
 		<div style="width: 1920px; height: 1080px; position: fixed; left: 0; top: 0; z-index: -1; overflow: hidden;   text-align: center ">
