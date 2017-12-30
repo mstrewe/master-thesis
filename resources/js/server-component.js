@@ -54,11 +54,13 @@ var ServerManager = function () {
             window.setTimeout(() => {
                 self.findServer();
             }, 200);
+            return;
         }
         if (Object.keys(NAF.connection.connectedClients).length === 0) {
             self.is_server = true;
             document.getElementById("player").setAttribute("position", room_positions[0].position);
             document.getElementById("player").setAttribute("rotation", room_positions[0].rotation);
+            document.getElementById("cursor_ring").setAttribute("material","color: #FF0000");
             self.room_positions[0].clientId = NAF.clientId;
         }
         else {
