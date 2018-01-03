@@ -80,7 +80,7 @@ var ServerManager = function () {
         document.getElementById("cursor_ring").setAttribute("material", "color: #FF0000");
         self.room_positions[0].clientId = NAF.clientId;
         window.setTimeout(function () { document.getElementById("player").components.position.data.x = document.getElementById("player").components.position.data.x + 0.00001; }, 50);
-        
+
     }
 
     this.findNextPosition = function (initiator) {
