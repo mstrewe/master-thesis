@@ -79,6 +79,8 @@ var ServerManager = function () {
         document.getElementById("player").setAttribute("rotation", room_positions[0].rotation);
         document.getElementById("cursor_ring").setAttribute("material", "color: #FF0000");
         self.room_positions[0].clientId = NAF.clientId;
+        window.setTimeout(function () { document.getElementById("player").components.position.data.x = document.getElementById("player").components.position.data.x + 0.00001; }, 50);
+        
     }
 
     this.findNextPosition = function (initiator) {
@@ -102,6 +104,11 @@ var ServerManager = function () {
         clientIDs.sort();
         if (clientIDs[0] === NAF.clientId)
             self.makeServer();
+        else {
+            window.setTimeout(() => {
+                self.findServer();
+            }, 1100);
+        }
     };
 
     this.onGetPosition = function (senderid, dataType, data, targetID) {
