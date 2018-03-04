@@ -38,7 +38,7 @@ var pdfLoader = function () {
             document.querySelector('#video_asset').stop();
         });
 
-        document.getElementById('stop_button').addEventListener('click',function(evt){
+        document.getElementById('pause_button').addEventListener('click',function(evt){
             document.querySelector('#video_asset').pause();
         });
     };
