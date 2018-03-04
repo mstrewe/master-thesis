@@ -25,26 +25,37 @@
 		<!-- asset definitons -->
 		<a-assets>
 			<script id="avatar-template" type="text/html">
-					<a-entity class="torso" gltf-model="url(resources/models/humans/m3_torso.glb);"networked-audio-source rotation="0 180 0" position="0 -2 0" scale="1.5 1.5 1.5">
-					</a-entity>
-				</script>
-			<script id="avatar-head-template" type="text/html">
-					<a-entity class="head" gltf-model="url(resources/models/humans/m3_head.glb);" rotation="0 180 0" scale="0.13 0.13 0.13">
-					</a-entity>
+				<a-entity id="android" collada-model=" url(resources/models/android/android.dae);" networked-audio-source scale="0.3 0.3 0.3" rotation="0 230 0" >
+				</a-entity>
 			</script>
+			<script id="avatar-head-template" type="text/html">
+				<a-entity id="android-head" collada-model="url(resources/models/android/android_head.dae);" scale="0.3 0.3 0.3" rotation="0 230 0">
+				</a-entity>
+			</script>
+			<img id="sky" src="/resources/models/island/360_sky.jpg" />
+			<video src="resources/videos/1.mp4" id="video_asset" visible="false" />
+			<img id="play_asset" src="resources/images/play.jpg" />
+			<img id="pause_asset" src="resources/images/pause.jpg" />
+			<img id="stop_asset" src="resources/images/stop.png" />
 		</a-assets>
+		<a-sky src="#sky"></a-sky>
 
-		<a-entity id="player" networked="template:#avatar-template;showLocalTemplate:false;" position="0 2 0" wasd-controls>
-			<a-entity id="players-head" camera look-controls networked="template:#avatar-head-template;showLocalTemplate:false" position="0 0.39 0">
-				<a-entity id="cursor_ring" cursor="fuse: true; fuseTimeout: 500" position="0 0 -1" geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
+		<a-entity id="player" networked="template:#avatar-template;showLocalTemplate:false;" position="0 0.4 0" wasd-controls>
+			<a-entity id="players-head" camera look-controls networked="template:#avatar-head-template;showLocalTemplate:false" position="0 0 0">
+				<a-entity id="cursor_ring" cursor="fuse: true; fuseTimeout: 500" position="0 0 -0.5" geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
 				 material="color: black; shader: flat">
 					<a-animation begin="click" easing="ease-in" attribute="scale" dur="150" fill="forwards" from="0.1 0.1 0.1" to="1 1 1"></a-animation>
 					<a-animation begin="cursor-fusing" easing="ease-in" attribute="scale" dur="1500" fill="backwards" from="1 1 1" to="0.1 0.1 0.1"></a-animation>
 				</a-entity>
 			</a-entity>
 		</a-entity>
-		<a-entity gltf-model=" url(resources/models/apartment/scene.gltf);" position="0 0 0"></a-entity>
-		<a-entity static-sync material="shader: html; target: #htmlElement;fps:2;" position="-8.1 4.64 -6.7" rotation="0 45.836623610465864 0"
+		<!--<a-entity obj-model="obj: url(resources/models/island/island.obj);mtl: url(resources/models/island/island.mtl;" position="0 0 0"></a-entity> -->
+		<a-entity id="play_button" geometry="primitive: plane; width: 1; height: 1;" position="0.64 -0.08 -0.49" scale="0.1 0.1 0.1" material="src:#play_asset;" rotation="0 90 0"></a-entity>
+		<a-entity id="pause_button" geometry="primitive: plane; width: 1; height: 1;" position="0.64 -0.08 -0.59" scale="0.1 0.1 0.1" material="src:#pause_asset;" rotation="0 90 0"></a-entity>
+		<a-entity id="stop_button" geometry="primitive: plane; width: 1; height: 1;" position="0.64 -0.08 -0.69" scale="0.1 0.1 0.1" material="src:#stop_asset;" rotation="0 90 0"></a-entity>
+		<a-entity id="island" collada-model=" url(resources/models/island/island.dae);" scale="1 0.15 1" position="0 -1 0"></a-entity>
+
+		<a-entity event-sync static-sync material="shader: html; target: #htmlElement;fps:2;" position="-8.1 2.88 -6.7" rotation="0 45.836623610465864 0"
 		 scale="1 1 1" visible="true" id="WhiteBoard" mixin="null" geometry="height:4.56;width:8.74;primitive:plane"></a-entity>
 		<a-entity event-sync position="-4.17 4.78 -7.69" rotation="0 45 0" scale="1 1 1" visible="true" id="pdf_next_page" material="color:#80ff00"
 		 geometry="primitive:plane"></a-entity>
@@ -62,6 +73,9 @@
 				<canvas id="the-canvas"></canvas>
 			</div>
 		</div>
+
+		<a-videosphere visible="false" src="#video_asset">
+		</a-videosphere>
 	</a-scene>
 
 </body>

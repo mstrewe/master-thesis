@@ -20,6 +20,27 @@ var pdfLoader = function () {
             self.loadUrl("resources/pdf/143-1-611-1-10-20080609.pdf");
             console.log('pdf2 clicked: ', evt.detail.intersection.point);
         });
+
+        document.getElementById('play_button').addEventListener('click',function(evt){
+            document.querySelector('a-videosphere').setAttribute('visible',"true");
+            document.querySelector('#WhiteBoard').setAttribute('visible',"false");
+            document.querySelector('#island').setAttribute('visible',"false");
+            
+            document.querySelector('#video_asset').play();
+        });
+
+        document.getElementById('stop_button').addEventListener('click',function(evt){
+            document.querySelector('a-videosphere').setAttribute('visible',"false");
+            document.querySelector('#WhiteBoard').setAttribute('visible',"true");
+            document.querySelector('#island').setAttribute('visible',"true");
+            
+            document.querySelector('#video_asset').currentTime = 0;
+            document.querySelector('#video_asset').stop();
+        });
+
+        document.getElementById('stop_button').addEventListener('click',function(evt){
+            document.querySelector('#video_asset').pause();
+        });
     };
 
     this.loadUrl = function (url) {

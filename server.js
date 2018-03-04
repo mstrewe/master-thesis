@@ -19,6 +19,14 @@ var serveModels = serveStatic('resources/models', {
 var servePdf = serveStatic('resources/pdf', {
     'index': false
 });
+var serveJpg = serveStatic('resources/images',{
+    'index': false
+});
+
+var serveMP4 = serveStatic('resources/videos', {
+    'index': false
+});
+
 var serveIndex = serveStatic('resources/html', {
     'index': ['index.html']
 });
@@ -42,6 +50,8 @@ app.use('/easyrtc', serveEasyRTC);
 app.use('/resources/models', serveModels);
 app.use('/resources/pdf', servePdf);
 app.use('/resources/js', serveJS);
+app.use('/resources/videos',serveMP4);
+app.use('/resources/images',serveJpg);
 app.use('/', serveIndex);
 
 //create node.js http server and listen on port
