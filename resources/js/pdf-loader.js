@@ -25,6 +25,8 @@ var pdfLoader = function () {
             document.querySelector('a-videosphere').setAttribute('visible',"true");
             document.querySelector('#WhiteBoard').setAttribute('visible',"false");
             document.querySelector('#island').setAttribute('visible',"false");
+            document.querySelector('#pdf_next_page').setAttribute('visible',"false");
+            document.querySelector('#pdf_previus_page').setAttribute('visible',"false");
             
             document.querySelector('#video_asset').play();
         });
@@ -33,6 +35,8 @@ var pdfLoader = function () {
             document.querySelector('a-videosphere').setAttribute('visible',"false");
             document.querySelector('#WhiteBoard').setAttribute('visible',"true");
             document.querySelector('#island').setAttribute('visible',"true");
+            document.querySelector('#pdf_next_page').setAttribute('visible',"true");
+            document.querySelector('#pdf_previus_page').setAttribute('visible',"true");
             
             document.querySelector('#video_asset').currentTime = 0;
             document.querySelector('#video_asset').stop();
