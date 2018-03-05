@@ -8,27 +8,27 @@ var ServerManager = function () {
     this.init = function () {
         room_positions = [
             {
-                position: '1.29 0 -0.68',
+                position: '1.29 0.13 -0.68',
                 rotation: '0 0 0'
             },
             {
-                position: '1.49 0 2.05',
+                position: '1.49 0.13 2.05',
                 rotation: '0 0 0'
             },
             {
-                position: '2.79 0 4.07',
+                position: '2.79 0.13 4.07',
                 rotation: '0 0 0'
             },
             {
-                position: '3.06 0 6.20',
+                position: '3.06 0.13 6.20',
                 rotation: '0 -48 0'
             },
             {
-                position: '-7.87 0 5.61',
+                position: '-7.87 0.13 5.61',
                 rotation: '0 270 0'
             },
             {
-                position: '-7.87 0 3.83',
+                position: '-7.87 0.13 3.83',
                 rotation: '0 270 0'
             },
             {
