@@ -8,6 +8,8 @@ var serveStatic = require('serve-static');
 var easyrtc = require('easyrtc');
 var socketIo = require("socket.io");
 var express = require("express");
+var bodyParser = require('body-parser');
+var $ = require("jquery");
 
 // create route handlers
 var serveEasyRTC = serveStatic('easyrtc', {
@@ -28,7 +30,7 @@ var serveMP4 = serveStatic('resources/videos', {
 });
 
 var serveIndex = serveStatic('resources/html', {
-    'index': ['index.html']
+    'index': ['login.html']
 });
 var serveJS = serveStatic('resources/js', {
     'index': false
@@ -37,6 +39,7 @@ var serveJS = serveStatic('resources/js', {
 //create webserver
 var app = connect();
 app.use(compression());
+app.use(bodyParser.json());
 
 // store session state in browser cookie
 var cookieSession = require('cookie-session');

@@ -8,6 +8,7 @@
 	<script src="https://unpkg.com/networked-aframe/dist/networked-aframe.min.js"></script>
 	<script src="easyrtc/easyrtc.js"></script>
 	<script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
+	<script src="resources/js/inspect.js"></script>
 
 	<!-- self implemented content -->
 	<script src="resources/js/pdf-loader.js"></script>
@@ -21,15 +22,15 @@
 	debug: true;
 	adapter: easyrtc;
 	audio : true;
-	serverURL: http://localhost:8080/;" inspector="url: https://aframe.io/releases/0.3.0/aframe-inspector.min.js">
+	serverURL: http://localhost:8080/;" inspector="url: https://aframe.io/releases/0.3.0/aframe-inspector.min.js" selfinspect 	>
 		<!-- asset definitons -->
 		<a-assets>
 			<script id="avatar-template" type="text/html">
-				<a-entity id="android" collada-model=" url(resources/models/android/android.dae);" networked-audio-source scale="0.3 0.3 0.3" rotation="0 230 0" >
+				<a-entity id="android" collada-model=" url(resources/models/android/Android.dae);" networked-audio-source scale="0.3 0.3 0.3" rotation="0 230 0" >
 				</a-entity>
 			</script>
 			<script id="avatar-head-template" type="text/html">
-				<a-entity id="android-head" collada-model="url(resources/models/android/android_head.dae);" scale="0.3 0.3 0.3" rotation="0 230 0">
+				<a-entity id="android-head" collada-model="url(resources/models/android/Android_head.dae);" scale="0.3 0.3 0.3" rotation="0 230 0">
 				</a-entity>
 			</script>
 			<img id="sky" src="/resources/models/island/360_sky.jpg" />
@@ -39,6 +40,7 @@
 			<img id="stop_asset" src="resources/images/stop.png" />
 			<img id="left_asset" src="resources/images/left.jpg"/>
 			<img id="right_asset" src="resources/images/right.jpg"/>
+			<img id="upload_asset" src="resources/images/upload.jpg"/>
 		</a-assets>
 		<a-sky src="#sky"></a-sky>
 

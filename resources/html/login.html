@@ -1,0 +1,87 @@
+<html>
+
+<head>
+	
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
+	<script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v3.12.4/dist/aframe-extras.min.js"></script>
+	<script src="https://unpkg.com/aframe-html-shader@0.2.0/dist/aframe-html-shader.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
+	<script src="https://unpkg.com/networked-aframe/dist/networked-aframe.min.js"></script>
+	<script src="easyrtc/easyrtc.js"></script>
+	<script src="resources/js/service/loginService.js"></script>
+	<script src="resources/js/custom-components/aframe-onclick.js"></script>
+
+</head>
+
+<body>
+	<a-scene inspector="url: https://aframe.io/releases/0.3.0/aframe-inspector.min.js">
+		<!-- asset definitons -->
+		<a-assets>
+
+			<img id="sky" src="/resources/models/island/360_sky.jpg" />
+			<img id="teacher_login_asset" src="/resources/images/teacher_login.jpg" />
+			<img id="learner_login_asset" src="/resources/images/learner_login.jpg" />
+
+			<img id="pin_0_asset" src="/resources/images/0.jpg"/>
+			<img id="pin_1_asset" src="/resources/images/1.jpg"/>			
+			<img id="pin_2_asset" src="/resources/images/2.jpg"/>
+			<img id="pin_3_asset" src="/resources/images/3.jpg"/>
+			<img id="pin_4_asset" src="/resources/images/4.jpg"/>
+			<img id="pin_5_asset" src="/resources/images/5.jpg"/>
+			<img id="pin_6_asset" src="/resources/images/6.jpg"/>
+			<img id="pin_7_asset" src="/resources/images/7.jpg"/>
+			<img id="pin_8_asset" src="/resources/images/8.jpg"/>
+			<img id="pin_9_asset" src="/resources/images/9.jpg"/>
+
+			<img id="pin_correct" src="/resources/images/correct.jpg"/>
+		</a-assets>
+		<a-sky src="#sky"></a-sky>
+
+		<a-entity id="players-head" camera look-controls position="0 0 0">
+			<a-entity id="cursor_ring" cursor="fuse: true; fuseTimeout: 500" position="0 0 -0.5" geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
+			 material="color: black; shader: flat">
+				<a-animation begin="click" easing="ease-in" attribute="scale" dur="150" fill="forwards" from="0.1 0.1 0.1" to="1 1 1"></a-animation>
+				<a-animation begin="cursor-fusing" easing="ease-in" attribute="scale" dur="1500" fill="backwards" from="1 1 1" to="0.1 0.1 0.1"></a-animation>
+			</a-entity>
+		</a-entity>
+
+		<!--<a-entity obj-model="obj: url(resources/models/island/island.obj);mtl: url(resources/models/island/island.mtl;" position="0 0 0"></a-entity> -->
+		<a-entity _onclick="on_teacher_login_clicked()" id="teacher_login" geometry="primitive: plane; width: 1; height: 1;" position="-2 -0.3 -4"
+		 scale="1 1 1" material="src:#teacher_login_asset;" rotation="-30 0 0"></a-entity>
+		<a-entity _onclick="on_teacher_login_clicked()" id="learner_login" geometry="primitive: plane; width: 1; height: 1;" position="2 -0.3 -4"
+		 scale="1 1 1" material="src:#learner_login_asset;" rotation="-30 0 0"></a-entity>
+
+		<a-entity id="pin_entity">
+			<a-entity visible="false" id="pin_0" geometry="primitive: plane; width: 1; height: 1;" position="0 -2 -4"
+			scale="0.5 0.5 0.5" material="src:#pin_0_asset;" rotation="-30 0 0"> </a-entity>
+			<a-entity visible="false" id="pin_1" geometry="primitive: plane; width: 1; height: 1;" position="-1 1 -4"
+			scale="0.5 0.5 0.5" material="src:#pin_1_asset;" rotation="-30 0 0"> </a-entity>
+			<a-entity visible="false" id="pin_2" geometry="primitive: plane; width: 1; height: 1;" position="0 1 -4"
+			scale="0.5 0.5 0.5" material="src:#pin_2_asset;" rotation="-30 0 0"> </a-entity>
+			<a-entity visible="false" id="pin_3" geometry="primitive: plane; width: 1; height: 1;" position="1 1 -4"
+			scale="0.5 0.5 0.5" material="src:#pin_3_asset;" rotation="-30 0 0"> </a-entity>
+			<a-entity visible="false" id="pin_4" geometry="primitive: plane; width: 1; height: 1;" position="-1 0 -4"
+			scale="0.5 0.5 0.5" material="src:#pin_4_asset;" rotation="-30 0 0"> </a-entity>
+			<a-entity visible="false" id="pin_5" geometry="primitive: plane; width: 1; height: 1;" position="0 0 -4"
+			scale="0.5 0.5 0.5" material="src:#pin_5_asset;" rotation="-30 0 0"> </a-entity>
+			<a-entity visible="false" id="pin_6" geometry="primitive: plane; width: 1; height: 1;" position="1 0 -4"
+			scale="0.5 0.5 0.5" material="src:#pin_6_asset;" rotation="-30 0 0"> </a-entity>
+			<a-entity visible="false" id="pin_7" geometry="primitive: plane; width: 1; height: 1;" position="-1 -1 -4"
+			scale="0.5 0.5 0.5" material="src:#pin_7_asset;" rotation="-30 0 0"> </a-entity>
+			<a-entity visible="false" id="pin_8" geometry="primitive: plane; width: 1; height: 1;" position="0 -1 -4"
+			scale="0.5 0.5 0.5" material="src:#pin_8_asset;" rotation="-30 0 0"> </a-entity>
+			<a-entity visible="false" id="pin_9" geometry="primitive: plane; width: 1; height: 1;" position="1 -1 -4"
+			scale="0.5 0.5 0.5" material="src:#pin_9_asset;" rotation="-30 0 0"> </a-entity>
+			<a-entity visible="false" id="pin_correct" geometry="primitive: plane; width: 1; height: 1;" position="1 -2 -4"
+			scale="0.5 0.5 0.5" material="src:#pin_correct_asset;" rotation="-30 0 0"> </a-entity>
+
+			<a-entity> </a-entity>
+			<a-entity> </a-entity>
+			<a-entity> </a-entity>
+			<a-entity> </a-entity>
+		</a-entity>
+	</a-scene>
+</body>
+
+</html>

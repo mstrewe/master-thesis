@@ -18,6 +18,7 @@
         "serve-static": "1.13.1",
         "easyrtc":"1.1.0",
         "socket.io":"2.0.4",
-        "express":"4.16.2"
+        "express":"4.16.2",
+        "jquery": "3.3.1"
     }
 }
