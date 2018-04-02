@@ -1,15 +1,14 @@
 <html>
 
 <head>
-	<script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
-	<script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v3.12.4/dist/aframe-extras.min.js"></script>
+	<script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
+	<script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v4.0.0/dist/aframe-extras.min.js"></script>
 	<script src="https://unpkg.com/aframe-html-shader@0.2.0/dist/aframe-html-shader.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
-	<script src="https://unpkg.com/networked-aframe/dist/networked-aframe.min.js"></script>
+	<script src="https://unpkg.com/networked-aframe@0.5.0/dist/networked-aframe.min.js"></script>
 	<script src="easyrtc/easyrtc.js"></script>
 	<script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
-	<script src="resources/js/inspect.js"></script>
-
+	
 	<!-- self implemented content -->
 	<script src="resources/js/pdf-loader.js"></script>
 	<script src="resources/js/custom-components/event-sync.js"></script>
@@ -22,7 +21,7 @@
 	debug: true;
 	adapter: easyrtc;
 	audio : true;
-	serverURL: http://localhost:8080/;" inspector="url: https://aframe.io/releases/0.3.0/aframe-inspector.min.js" selfinspect 	>
+	serverURL: http://localhost:8080/;" inspector="url: https://aframe.io/releases/0.3.0/aframe-inspector.min.js"  	>
 		<!-- asset definitons -->
 		<a-assets>
 			<script id="avatar-template" type="text/html">
@@ -40,7 +39,7 @@
 			<img id="stop_asset" src="resources/images/stop.png" />
 			<img id="left_asset" src="resources/images/left.jpg"/>
 			<img id="right_asset" src="resources/images/right.jpg"/>
-			<img id="upload_asset" src="resources/images/upload.jpg"/>
+			<img id="upload_asset" src="resources/images/upload.png"/>
 		</a-assets>
 		<a-sky src="#sky"></a-sky>
 

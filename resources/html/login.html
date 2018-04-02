@@ -34,7 +34,10 @@
 			<img id="pin_8_asset" src="/resources/images/8.jpg"/>
 			<img id="pin_9_asset" src="/resources/images/9.jpg"/>
 
-			<img id="pin_correct" src="/resources/images/correct.jpg"/>
+			<img id="pin_correct_asset" src="/resources/images/correct.jpg"/>
+			<img id="pin_close_asset" src="/resources/images/close.jpg"/>
+			<img id="pin_star_asset" src="/resources/images/star.jpg"/>
+
 		</a-assets>
 		<a-sky src="#sky"></a-sky>
 
@@ -47,39 +50,43 @@
 		</a-entity>
 
 		<!--<a-entity obj-model="obj: url(resources/models/island/island.obj);mtl: url(resources/models/island/island.mtl;" position="0 0 0"></a-entity> -->
-		<a-entity _onclick="on_teacher_login_clicked()" id="teacher_login" geometry="primitive: plane; width: 1; height: 1;" position="-2 -0.3 -4"
+		<a-entity aframe-onclick="on_teacher_login_clicked()" id="teacher_login" geometry="primitive: plane; width: 1; height: 1;" position="-2 -0.3 -4"
 		 scale="1 1 1" material="src:#teacher_login_asset;" rotation="-30 0 0"></a-entity>
-		<a-entity _onclick="on_teacher_login_clicked()" id="learner_login" geometry="primitive: plane; width: 1; height: 1;" position="2 -0.3 -4"
+		<a-entity aframe-onclick="on_learner_login_clicked()" id="learner_login" geometry="primitive: plane; width: 1; height: 1;" position="2 -0.3 -4"
 		 scale="1 1 1" material="src:#learner_login_asset;" rotation="-30 0 0"></a-entity>
 
-		<a-entity id="pin_entity">
-			<a-entity visible="false" id="pin_0" geometry="primitive: plane; width: 1; height: 1;" position="0 -2 -4"
+		<a-entity visible="false" id="pin_entity">
+			<a-entity aframe-onclick="on_pin_field_clicked('0')" id="pin_0" geometry="primitive: plane; width: 1; height: 1;" position="0 -2 -4"
 			scale="0.5 0.5 0.5" material="src:#pin_0_asset;" rotation="-30 0 0"> </a-entity>
-			<a-entity visible="false" id="pin_1" geometry="primitive: plane; width: 1; height: 1;" position="-1 1 -4"
-			scale="0.5 0.5 0.5" material="src:#pin_1_asset;" rotation="-30 0 0"> </a-entity>
-			<a-entity visible="false" id="pin_2" geometry="primitive: plane; width: 1; height: 1;" position="0 1 -4"
-			scale="0.5 0.5 0.5" material="src:#pin_2_asset;" rotation="-30 0 0"> </a-entity>
-			<a-entity visible="false" id="pin_3" geometry="primitive: plane; width: 1; height: 1;" position="1 1 -4"
-			scale="0.5 0.5 0.5" material="src:#pin_3_asset;" rotation="-30 0 0"> </a-entity>
-			<a-entity visible="false" id="pin_4" geometry="primitive: plane; width: 1; height: 1;" position="-1 0 -4"
+			<a-entity aframe-onclick="on_pin_field_clicked('1')"  id="pin_1" geometry="primitive: plane; width: 1; height: 1;" position="-1 1 -4"
+			scale="0.5 0.5 0.5" material="src:#pin_1_asset;" rotation="0 0 0"> </a-entity>
+			<a-entity aframe-onclick="on_pin_field_clicked('2')" id="pin_2" geometry="primitive: plane; width: 1; height: 1;" position="0 1 -4"
+			scale="0.5 0.5 0.5" material="src:#pin_2_asset;" rotation="0 0 0"> </a-entity>
+			<a-entity aframe-onclick="on_pin_field_clicked('3')" id="pin_3" geometry="primitive: plane; width: 1; height: 1;" position="1 1 -4"
+			scale="0.5 0.5 0.5" material="src:#pin_3_asset;" rotation="0 0 0"> </a-entity>
+			<a-entity aframe-onclick="on_pin_field_clicked('4')" id="pin_4" geometry="primitive: plane; width: 1; height: 1;" position="-1 0 -4"
 			scale="0.5 0.5 0.5" material="src:#pin_4_asset;" rotation="-30 0 0"> </a-entity>
-			<a-entity visible="false" id="pin_5" geometry="primitive: plane; width: 1; height: 1;" position="0 0 -4"
+			<a-entity aframe-onclick="on_pin_field_clicked('5')" id="pin_5" geometry="primitive: plane; width: 1; height: 1;" position="0 0 -4"
 			scale="0.5 0.5 0.5" material="src:#pin_5_asset;" rotation="-30 0 0"> </a-entity>
-			<a-entity visible="false" id="pin_6" geometry="primitive: plane; width: 1; height: 1;" position="1 0 -4"
+			<a-entity aframe-onclick="on_pin_field_clicked('6')" id="pin_6" geometry="primitive: plane; width: 1; height: 1;" position="1 0 -4"
 			scale="0.5 0.5 0.5" material="src:#pin_6_asset;" rotation="-30 0 0"> </a-entity>
-			<a-entity visible="false" id="pin_7" geometry="primitive: plane; width: 1; height: 1;" position="-1 -1 -4"
+			<a-entity aframe-onclick="on_pin_field_clicked('7')" id="pin_7" geometry="primitive: plane; width: 1; height: 1;" position="-1 -1 -4"
 			scale="0.5 0.5 0.5" material="src:#pin_7_asset;" rotation="-30 0 0"> </a-entity>
-			<a-entity visible="false" id="pin_8" geometry="primitive: plane; width: 1; height: 1;" position="0 -1 -4"
+			<a-entity aframe-onclick="on_pin_field_clicked('8')" id="pin_8" geometry="primitive: plane; width: 1; height: 1;" position="0 -1 -4"
 			scale="0.5 0.5 0.5" material="src:#pin_8_asset;" rotation="-30 0 0"> </a-entity>
-			<a-entity visible="false" id="pin_9" geometry="primitive: plane; width: 1; height: 1;" position="1 -1 -4"
+			<a-entity aframe-onclick="on_pin_field_clicked('9')" id="pin_9" geometry="primitive: plane; width: 1; height: 1;" position="1 -1 -4"
 			scale="0.5 0.5 0.5" material="src:#pin_9_asset;" rotation="-30 0 0"> </a-entity>
-			<a-entity visible="false" id="pin_correct" geometry="primitive: plane; width: 1; height: 1;" position="1 -2 -4"
+			<a-entity aframe-onclick="on_pin_field_clicked('clear')" id="pin_correct" geometry="primitive: plane; width: 1; height: 1;" position="1 -2 -4"
 			scale="0.5 0.5 0.5" material="src:#pin_correct_asset;" rotation="-30 0 0"> </a-entity>
 
-			<a-entity> </a-entity>
-			<a-entity> </a-entity>
-			<a-entity> </a-entity>
-			<a-entity> </a-entity>
+			<a-entity aframe-onclick="on_backToLogin_clicked()" geometry="primitive: plane; width: 1; height: 1;" position="2 -2 -4" 
+			scale="0.5 0.5 0.5" material="src:#pin_close_asset;" rotation="-30 0 0"> </a-entity>
+			
+			<a-entity id="pin_star_0" geometry="primitive: plane; width: 1; height:1;" position="-1.5 2 -4" scale="0.5 0.5 0.5" material="color:white;" rotation="30 0 0"> </a-entity>
+			<a-entity id="pin_star_1" geometry="primitive: plane; width: 1; height:1;" position="-0.5 2 -4" scale="0.5 0.5 0.5" material="color:white;" rotation="30 0 0"> </a-entity>
+			<a-entity id="pin_star_2" geometry="primitive: plane; width: 1; height:1;" position="0.5 2 -4" scale="0.5 0.5 0.5" material="color:white;" rotation="30 0 0"> </a-entity>
+			<a-entity id="pin_star_3" geometry="primitive: plane; width: 1; height:1;" position="1.5 2 -4" scale="0.5 0.5 0.5" material="color:white;" rotation="30 0 0"> </a-entity>
+			
 		</a-entity>
 	</a-scene>
 </body>

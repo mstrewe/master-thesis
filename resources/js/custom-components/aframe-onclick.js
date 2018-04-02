@@ -1,8 +1,8 @@
-AFRAME.registerComponent("_onclick", {
+AFRAME.registerComponent("aframe-onclick", {
  
     init: function () {
         var element = this.el;
-        var definedFunc = this.el.attributes["_onclick"].value;
+        var definedFunc = this.el.attributes["aframe-onclick"].value;
         element.addEventListener("click", function () {
             eval(definedFunc);
         });
