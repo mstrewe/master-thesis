@@ -27,7 +27,7 @@ var pdfLoader = function () {
             document.querySelector('#island').setAttribute('visible',"false");
             document.querySelector('#pdf_next_page').setAttribute('visible',"false");
             document.querySelector('#pdf_previus_page').setAttribute('visible',"false");
-            
+            document.querySelector('#sky_entity').setAttribute('visible',"false");
             document.querySelector('#video_asset').play();
         });
 
@@ -37,6 +37,7 @@ var pdfLoader = function () {
             document.querySelector('#island').setAttribute('visible',"true");
             document.querySelector('#pdf_next_page').setAttribute('visible',"true");
             document.querySelector('#pdf_previus_page').setAttribute('visible',"true");
+            document.querySelector('#sky_entity').setAttribute('visible',"true");
             
             document.querySelector('#video_asset').currentTime = 0;
             document.querySelector('#video_asset').stop();

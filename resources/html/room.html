@@ -1,7 +1,7 @@
 <html>
 
 <head>
-	<script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
+	<script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
 	<script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v4.0.0/dist/aframe-extras.min.js"></script>
 	<script src="https://unpkg.com/aframe-html-shader@0.2.0/dist/aframe-html-shader.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
@@ -21,7 +21,7 @@
 	debug: true;
 	adapter: easyrtc;
 	audio : true;
-	serverURL: http://localhost:8080/;" inspector="url: https://aframe.io/releases/0.3.0/aframe-inspector.min.js"  	>
+	serverURL: http://localhost:8080/;" inspector="url: https://aframe.io/releases/0.3.0/aframe-inspector.min.js">
 		<!-- asset definitons -->
 		<a-assets>
 			<script id="avatar-template" type="text/html">
@@ -41,7 +41,7 @@
 			<img id="right_asset" src="resources/images/right.jpg"/>
 			<img id="upload_asset" src="resources/images/upload.png"/>
 		</a-assets>
-		<a-sky src="#sky"></a-sky>
+		<a-sky id="sky_entity" src="#sky"></a-sky>
 
 		<a-entity id="player" networked="template:#avatar-template;showLocalTemplate:false;" position="0 0.4 0" wasd-controls>
 			<a-entity id="players-head" camera look-controls networked="template:#avatar-head-template;showLocalTemplate:false" position="0 0 0">
