@@ -2,20 +2,20 @@ const debugString = "[DEBUG] ";
 
 function on_teacher_login_clicked() {
     //hide login buttons
-    $('#teacher_login')[0].setAttribute("visible", false);
-    $('#learner_login')[0].setAttribute("visible", false);
+    $('#teacher_login')[0].setAttribute("position", "-2000 -0.3 -4"); // original -2 -0.3 -4
+    $('#learner_login')[0].setAttribute("position", "-2000 -0.3 -4"); // original 2 -0.3 -4
 
     //show pin entities
-    $('#pin_entity')[0].setAttribute("visible", true);
+    $('#pin_entity')[0].setAttribute("position", "0 0 0");
 }
 
 function on_backToLogin_clicked() {
     //sjpw login buttons
-    $('#teacher_login')[0].setAttribute("visible", true);
-    $('#learner_login')[0].setAttribute("visible", true);
+    $('#teacher_login')[0].setAttribute("position", "-2 -0.3 -4");
+    $('#learner_login')[0].setAttribute("position", "2 -0.3 -4");
 
     //jode pin entities
-    $('#pin_entity')[0].setAttribute("visible", false);
+    $('#pin_entity')[0].setAttribute("position", "2000 0 0 ");
 }
 
 function on_learner_login_clicked() {
