@@ -35,19 +35,18 @@ function on_pin_field_clicked(fieldValue) {
 var pin;
 
 function resetPin() {
-    pin = new Array();
+    pin = "";
     updateView();
 }
 
 function setNextPinNumber(number) {
     console.log(debugString + "add number " + number);
     if (typeof (pin) == "undefined")
-        pin = new Array();
-    pin.push(number);
-
+        pin = "";
+    pin += number.toString();
     updateView();
 
-    if (pin.lenght == 4)
+    if (pin.length == 4)
         sendLogin();
 }
 
@@ -86,5 +85,21 @@ function updateView() {
 }
 
 function sendLogin() {
+    $.ajax(
+        {
+            data: JSON.stringify({ "pin": pin }),
+            method: "POST",
+            url: "/api/teacher_login",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+                if (response.success == true) {
+                    document.cookie = document.cookie + "logincookie=" + response.cookie + ";path=/"
+                }
+            },
+            error: function () {
 
+            }
+        }
+    )
 }

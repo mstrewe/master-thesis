@@ -1,4 +1,4 @@
-var connect = require('connect');
+var connect = require('express');
 var http = require('http');
 var apiMiddleWare = require('./src/api-middleware.js');
 // gzip/deflate outgoing responses
