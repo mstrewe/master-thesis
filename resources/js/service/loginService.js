@@ -94,11 +94,13 @@ function sendLogin() {
             dataType: "json",
             success: function (response) {
                 if (response.success == true) {
-                    document.cookie = document.cookie + "logincookie=" + response.cookie + ";path=/"
+                    document.location.href = "/room_teacher.html";
+                }else{
+                    // show wrong pin
                 }
             },
             error: function () {
-
+                //show error
             }
         }
     )

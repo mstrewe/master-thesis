@@ -9,6 +9,7 @@ var easyrtc = require('easyrtc');
 var socketIo = require("socket.io");
 var express = require("express");
 var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser')
 var $ = require("jquery");
 
 // create route handlers
@@ -21,7 +22,7 @@ var serveModels = serveStatic('resources/models', {
 var servePdf = serveStatic('resources/pdf', {
     'index': false
 });
-var serveJpg = serveStatic('resources/images',{
+var serveJpg = serveStatic('resources/images', {
     'index': false
 });
 
@@ -32,6 +33,7 @@ var serveMP4 = serveStatic('resources/videos', {
 var serveIndex = serveStatic('resources/html', {
     'index': ['login.html']
 });
+
 var serveJS = serveStatic('resources/js', {
     'index': false
 });
@@ -40,6 +42,7 @@ var serveJS = serveStatic('resources/js', {
 var app = connect();
 app.use(compression());
 app.use(bodyParser.json());
+app.use(cookieParser())
 
 // store session state in browser cookie
 var cookieSession = require('cookie-session');
@@ -53,8 +56,20 @@ app.use('/easyrtc', serveEasyRTC);
 app.use('/resources/models', serveModels);
 app.use('/resources/pdf', servePdf);
 app.use('/resources/js', serveJS);
-app.use('/resources/videos',serveMP4);
-app.use('/resources/images',serveJpg);
+app.use('/resources/videos', serveMP4);
+app.use('/resources/images', serveJpg);
+app.use('/', function (req, res, next) {
+    if(req._parsedUrl.pathname == "/room_teacher.html")
+    {
+        // check cookie here:
+        if(req.cookies.teacher_login_cookie != apiMiddleWare.getCurrentCookie())
+        {
+            res.sendStatus(401);
+        }
+        // send 404 when cookie do not fit
+    }
+    next();
+});
 app.use('/', serveIndex);
 
 //create node.js http server and listen on port
