@@ -9,7 +9,7 @@ module.exports = {
             if (req.body.pin == "5267") {
                 responseObject.success = true;
                 var cookie = self.getNewCookie();
-                res.cookie('teacher_login_cookie', cookie, {maxAge: 10800});
+                res.cookie('teacher_login_cookie', cookie, {maxAge: 7200000});
                 self._currentCookie = cookie;
             }
         }

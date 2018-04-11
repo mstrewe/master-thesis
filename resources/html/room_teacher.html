@@ -5,10 +5,10 @@
 	<script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v4.0.0/dist/aframe-extras.min.js"></script>
 	<script src="https://unpkg.com/aframe-html-shader@0.2.0/dist/aframe-html-shader.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
-	<script src="https://unpkg.com/networked-aframe@0.5.0/dist/networked-aframe.min.js"></script>
+	<script src="https://unpkg.com/networked-aframe@0.4.0/dist/networked-aframe.min.js"></script>
 	<script src="easyrtc/easyrtc.js"></script>
 	<script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
-	
+
 	<!-- self implemented content -->
 	<script src="resources/js/pdf-loader.js"></script>
 	<script src="resources/js/custom-components/event-sync.js"></script>
@@ -37,9 +37,9 @@
 			<img id="play_asset" src="resources/images/play.jpg" />
 			<img id="pause_asset" src="resources/images/pause.jpg" />
 			<img id="stop_asset" src="resources/images/stop.png" />
-			<img id="left_asset" src="resources/images/left.jpg"/>
-			<img id="right_asset" src="resources/images/right.jpg"/>
-			<img id="upload_asset" src="resources/images/upload.png"/>
+			<img id="left_asset" src="resources/images/left.jpg" />
+			<img id="right_asset" src="resources/images/right.jpg" />
+			<img id="upload_asset" src="resources/images/upload.png" />
 		</a-assets>
 		<a-sky id="sky_entity" src="#sky"></a-sky>
 
@@ -53,9 +53,12 @@
 			</a-entity>
 		</a-entity>
 		<!--<a-entity obj-model="obj: url(resources/models/island/island.obj);mtl: url(resources/models/island/island.mtl;" position="0 0 0"></a-entity> -->
-		<a-entity event-sync id="play_button" geometry="primitive: plane; width: 1; height: 1;" position="0.64 -0.3 -0.49" scale="0.1 0.1 0.1" material="src:#play_asset;" rotation="-30 90 0"></a-entity>
-		<a-entity event-sync id="pause_button" geometry="primitive: plane; width: 1; height: 1;" position="0.64 -0.3 -0.59" scale="0.1 0.1 0.1" material="src:#pause_asset;" rotation="-30 90 0"></a-entity>
-		<a-entity event-sync id="stop_button" geometry="primitive: plane; width: 1; height: 1;" position="0.64 -0.3 -0.69" scale="0.1 0.1 0.1" material="src:#stop_asset;" rotation="-30 90 0"></a-entity>
+		<a-entity event-sync id="play_button" geometry="primitive: plane; width: 1; height: 1;" position="0.64 -0.3 -0.49" scale="0.1 0.1 0.1"
+		 material="src:#play_asset;" rotation="-30 90 0"></a-entity>
+		<a-entity event-sync id="pause_button" geometry="primitive: plane; width: 1; height: 1;" position="0.64 -0.3 -0.59" scale="0.1 0.1 0.1"
+		 material="src:#pause_asset;" rotation="-30 90 0"></a-entity>
+		<a-entity event-sync id="stop_button" geometry="primitive: plane; width: 1; height: 1;" position="0.64 -0.3 -0.69" scale="0.1 0.1 0.1"
+		 material="src:#stop_asset;" rotation="-30 90 0"></a-entity>
 		<a-entity id="island" collada-model=" url(resources/models/island/island.dae);" scale="1 0.15 1" position="0 -1 0"></a-entity>
 
 		<a-entity static-sync material="shader: html; target: #htmlElement;fps:2;" position="-8.1 2.88 -6.7" rotation="0 45.836623610465864 0"
@@ -64,9 +67,9 @@
 		 geometry="primitive:plane"></a-entity>
 		<a-entity event-sync position="-8.92 4.78 -2.54" rotation="0 45 0" scale="1 1 1" visible="true" id="pdf_previus_page" material="src:#left_asset"
 		 geometry="primitive:plane"></a-entity>
-		<a-entity event-sync position="-4.35 0.76 3.19" rotation="270 3.1799999999999997 0" scale="0.5 0.5 1" visible="true" id="pdf1"
+		<a-entity event-sync position="1.6 -0.3 -0.79" rotation="270 3.1799999999999997 0" scale="0.5 0.5 1" visible="true" id="pdf1"
 		 geometry="primitive:plane" material=""></a-entity>
-		<a-entity event-sync position="-4.35 0.76 3.99" rotation="270 3.1799999999999997 0" scale="0.5 0.5 1" visible="true" id="pdf2"
+		<a-entity event-sync position="1.6 -0.3 -1.89" rotation="270 3.1799999999999997 0" scale="0.5 0.5 1" visible="true" id="pdf2"
 		 geometry="primitive:plane" material=""></a-entity>
 		<!-- Div for pdf rendering-->
 		<div style="width: 1920px; height: 1080px; position: fixed; left: 0; top: 0; z-index: -1; overflow: hidden;   text-align: center ">

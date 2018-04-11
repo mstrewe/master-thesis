@@ -59,7 +59,7 @@ app.use('/resources/js', serveJS);
 app.use('/resources/videos', serveMP4);
 app.use('/resources/images', serveJpg);
 app.use('/', function (req, res, next) {
-    if(req._parsedUrl.pathname == "/room_teacher.html")
+    if(req._parsedUrl.pathname == "/room_teacher.html" && req.method == "GET")
     {
         // check cookie here:
         if(req.cookies.teacher_login_cookie != apiMiddleWare.getCurrentCookie())

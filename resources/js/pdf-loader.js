@@ -51,7 +51,7 @@ var pdfLoader = function () {
     this.loadUrl = function (url) {
 
         // Asynchronous download PDF
-        PDFJS.getDocument(url)
+        pdfjsLib.getDocument(url)
             .then(function (pdf) {
                 self.documentCache.url = url;
                 self.documentCache.pdf = pdf;
