@@ -46,6 +46,11 @@ var pdfLoader = function () {
         document.getElementById('pause_button').addEventListener('click',function(evt){
             document.querySelector('#video_asset').pause();
         });
+
+        $("#upload_button").click(function(e){
+            // show upload hint
+            window.setTimeout(function(){$('#gotoupload')[0].click();},4000);
+         });
     };
 
     this.loadUrl = function (url) {

@@ -12,32 +12,41 @@ var ServerManager = function () {
                 rotation: '0 0 0'
             },
             {
-                position: '1.49 0.13 2.05',
+                position: '1.29 0.13 -0.28',
+                rotation: '0 0 0',
+                color: 'blue'
+            },
+            {
+                position: '1.29 0.13 0.28',
+                rotation: '0 0 0',
+                color: 'lightblue'
+            },
+            {
+                position: '1.29 0.13 0.68',
+                rotation: '0 0 0',
+                color: 'pink'
+            },
+            {
+                position: '1.29 0.13 1.08',
+                rotation: '0 0 0',
+                color: 'red'
+            },
+            {
+                position: '1.29 0.13 1.48',
+                rotation: '0 0 0',
+                color: 'yellow'
+            },
+            {
+                position: '1.29 0.13 1.88',
                 rotation: '0 0 0'
             },
             {
-                position: '2.79 0.13 4.07',
+                position: '1.29 0.13 2.28',
                 rotation: '0 0 0'
             },
             {
-                position: '3.06 0.13 6.20',
-                rotation: '0 -48 0'
-            },
-            {
-                position: '-7.87 0.13 5.61',
-                rotation: '0 270 0'
-            },
-            {
-                position: '-7.87 0.13 3.83',
-                rotation: '0 270 0'
-            },
-            {
-                position: '-7.87 0 1.97',
-                rotation: '0 270 0'
-            },
-            {
-                position: '-5.86 0 1.17',
-                roation: '0 180 0'
+                position: '1.29 0.13 2.68',
+                rotation: '0 0 0'
             }];
 
 
@@ -50,7 +59,7 @@ var ServerManager = function () {
 
         document.body.addEventListener('clientDisconnected', self.findNewServer);
 
-        self.findServer();
+      //  self.findServer();
     };
 
     this.findNewServer = function () {
@@ -65,13 +74,20 @@ var ServerManager = function () {
             }, 200);
             return;
         }
+        window.setTimeout(() => {
+            self.broadcastFindServer();
+        },500);
+    };
+
+    this.broadcastFindServer = function()
+    {
         if (Object.keys(NAF.connection.connectedClients).length === 0) {
             self.makeServer();
         }
         else {
             NAF.connection.broadcastData("sc_gp", {});
         }
-    };
+    }
 
     this.makeServer = function () {
         self.is_server = true;
@@ -125,6 +141,8 @@ var ServerManager = function () {
             var el = document.getElementById("player");
             el.setAttribute("position", data.position);
             el.setAttribute("rotation", data.rotation);
+            if(typeof data.color != 'undefined' )
+            el.setAttribute("collada-model", "url(resources/models/android/Android"+"_"+data.color+".dae)");
             //call network update
             window.setTimeout(function () { document.getElementById("player").components.position.data.x = document.getElementById("player").components.position.data.x + 0.00001; }, 50);
         }

@@ -6,6 +6,7 @@
 	<script src="https://unpkg.com/aframe-html-shader@0.2.0/dist/aframe-html-shader.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
 	<script src="https://unpkg.com/networked-aframe@0.4.0/dist/networked-aframe.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	<script src="easyrtc/easyrtc.js"></script>
 	<script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
 
@@ -13,6 +14,7 @@
 	<script src="resources/js/pdf-loader.js"></script>
 	<script src="resources/js/custom-components/event-sync.js"></script>
 	<script src="resources/js/server-component.js"></script>
+	
 </head>
 
 <body onload="pdfLoader().init(); ServerManager().init();">
@@ -59,7 +61,11 @@
 		 material="src:#pause_asset;" rotation="-30 90 0"></a-entity>
 		<a-entity event-sync id="stop_button" geometry="primitive: plane; width: 1; height: 1;" position="0.64 -0.3 -0.69" scale="0.1 0.1 0.1"
 		 material="src:#stop_asset;" rotation="-30 90 0"></a-entity>
-		<a-entity id="island" collada-model=" url(resources/models/island/island.dae);" scale="1 0.15 1" position="0 -1 0"></a-entity>
+		<a-entity event-sync id="upload_button" geometry="primitive: plane; width: 1; height: 1;" position="0.64 -0.3 -0.79" scale="0.1 0.1 0.1"
+		 material="src:#upload_asset;" rotation="-30 90 0"></a-entity>
+		
+		
+		 <a-entity id="island" collada-model=" url(resources/models/island/island.dae);" scale="1 0.15 1" position="0 -1 0"></a-entity>
 
 		<a-entity static-sync material="shader: html; target: #htmlElement;fps:2;" position="-8.1 2.88 -6.7" rotation="0 45.836623610465864 0"
 		 scale="1 1 1" visible="true" id="WhiteBoard" mixin="null" geometry="height:4.56;width:8.74;primitive:plane"></a-entity>
@@ -83,6 +89,15 @@
 		<a-videosphere visible="false" src="#video_asset">
 		</a-videosphere>
 	</a-scene>
+
+	<input id="fileinput" type="file"/>
+<a id="gotoupload" href="/upload.html" target="blank"/>
+	<script>
+		function onConnect () {
+		
+			ServerManager().findServer();
+		}
+	</script>
 
 </body>
 
