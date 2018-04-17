@@ -18,6 +18,33 @@
 </head>
 
 <body onload="pdfLoader().init(); ServerManager().init();">
+	<script >
+		NAF.schemas.add({
+  template: '#avatar-template',
+  components: [
+    'position',
+    'rotation',
+    'scale',
+    {
+      selector: '#android',
+      component: 'collada-model',
+    },
+  ]
+});
+
+	NAF.schemas.add({
+  template: '#avatar-head-template',
+  components: [
+    'position',
+    'rotation',
+    'scale',
+    {
+      selector: '#android-head',
+      component: 'collada-model',
+    },
+  ]
+});
+		</script>
 	<a-scene networked-scene="
 	room: default;
 	debug: true;

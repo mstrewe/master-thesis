@@ -6,6 +6,7 @@
 	<script src="https://unpkg.com/aframe-html-shader@0.2.0/dist/aframe-html-shader.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
 	<script src="https://unpkg.com/networked-aframe@0.4.0/dist/networked-aframe.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	<script src="easyrtc/easyrtc.js"></script>
 	<script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
 
@@ -16,6 +17,33 @@
 </head>
 
 <body onload="pdfLoader().init(); ServerManager().init();">
+		<script >
+				NAF.schemas.add({
+		  template: '#avatar-template',
+		  components: [
+			'position',
+			'rotation',
+			'scale',
+			{
+			  selector: '#android',
+			  component: 'collada-model',
+			},
+		  ]
+		});
+		
+			NAF.schemas.add({
+		  template: '#avatar-head-template',
+		  components: [
+			'position',
+			'rotation',
+			'scale',
+			{
+			  selector: '#android-head',
+			  component: 'collada-model',
+			},
+		  ]
+		});
+				</script>
 	<a-scene networked-scene="
 	room: default;
 	debug: true;

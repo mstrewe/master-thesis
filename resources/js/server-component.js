@@ -59,7 +59,7 @@ var ServerManager = function () {
 
         document.body.addEventListener('clientDisconnected', self.findNewServer);
 
-      //  self.findServer();
+        //  self.findServer();
     };
 
     this.findNewServer = function () {
@@ -76,11 +76,10 @@ var ServerManager = function () {
         }
         window.setTimeout(() => {
             self.broadcastFindServer();
-        },500);
+        }, 500);
     };
 
-    this.broadcastFindServer = function()
-    {
+    this.broadcastFindServer = function () {
         if (Object.keys(NAF.connection.connectedClients).length === 0) {
             self.makeServer();
         }
@@ -133,7 +132,8 @@ var ServerManager = function () {
                 return;
             var pos = self.findNextPosition(senderid);
             NAF.connection.sendData(senderid, "sc_gp_r", pos);
-        }
+            //colorize the model
+                }
     };
 
     this.onGetPositionResponse = function (senderid, dataType, data, targetID) {
@@ -141,8 +141,10 @@ var ServerManager = function () {
             var el = document.getElementById("player");
             el.setAttribute("position", data.position);
             el.setAttribute("rotation", data.rotation);
-            if(typeof data.color != 'undefined' )
-            el.setAttribute("collada-model", "url(resources/models/android/Android"+"_"+data.color+".dae)");
+            var localPlayer = $("#android");
+            var localPlayerHead = $("#players-head");
+            localPlayer.attr("collada-model", "url(resources/models/android/Android_" + data.color + ".dae);");
+            localPlayerHead.attr("collada-model", "url(resources/models/android/Android_head_" + data.color + ".dae);");
             //call network update
             window.setTimeout(function () { document.getElementById("player").components.position.data.x = document.getElementById("player").components.position.data.x + 0.00001; }, 50);
         }
