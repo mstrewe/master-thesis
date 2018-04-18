@@ -133,7 +133,7 @@ var ServerManager = function () {
             var pos = self.findNextPosition(senderid);
             NAF.connection.sendData(senderid, "sc_gp_r", pos);
             //colorize the model
-                }
+        }
     };
 
     this.onGetPositionResponse = function (senderid, dataType, data, targetID) {
@@ -143,8 +143,16 @@ var ServerManager = function () {
             el.setAttribute("rotation", data.rotation);
             var localPlayer = $("#android");
             var localPlayerHead = $("#players-head");
-            localPlayer.attr("collada-model", "url(resources/models/android/Android_" + data.color + ".dae);");
-            localPlayerHead.attr("collada-model", "url(resources/models/android/Android_head_" + data.color + ".dae);");
+            window.setTimeout(
+                function () {
+                    localPlayer.attr("collada-model", "url(resources/models/android/Android_" + data.color + ".dae);");
+                    localPlayer.attr("visible", "false");
+                }, 5000);
+            window.setTimeout(
+                function () {
+                    localPlayerHead.attr("collada-model", "url(resources/models/android/Android_head_" + data.color + ".dae);");
+                    localPlayerHead.attr("visible", "false");
+                }, 5000);
             //call network update
             window.setTimeout(function () { document.getElementById("player").components.position.data.x = document.getElementById("player").components.position.data.x + 0.00001; }, 50);
         }

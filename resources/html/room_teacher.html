@@ -14,37 +14,37 @@
 	<script src="resources/js/pdf-loader.js"></script>
 	<script src="resources/js/custom-components/event-sync.js"></script>
 	<script src="resources/js/server-component.js"></script>
-	
+
 </head>
 
 <body onload="pdfLoader().init(); ServerManager().init();">
-	<script >
+	<script>
 		NAF.schemas.add({
-  template: '#avatar-template',
-  components: [
-    'position',
-    'rotation',
-    'scale',
-    {
-      selector: '#android',
-      component: 'collada-model',
-    },
-  ]
-});
+			template: '#avatar-template',
+			components: [
+				'position',
+				'rotation',
+				'scale',
+				{
+					selector: '#android',
+					component: 'collada-model',
+				},
+			]
+		});
 
-	NAF.schemas.add({
-  template: '#avatar-head-template',
-  components: [
-    'position',
-    'rotation',
-    'scale',
-    {
-      selector: '#android-head',
-      component: 'collada-model',
-    },
-  ]
-});
-		</script>
+		NAF.schemas.add({
+			template: '#avatar-head-template',
+			components: [
+				'position',
+				'rotation',
+				'scale',
+				{
+					selector: '#android-head',
+					component: 'collada-model',
+				},
+			]
+		});
+	</script>
 	<a-scene networked-scene="
 	room: default;
 	debug: true;
@@ -90,9 +90,9 @@
 		 material="src:#stop_asset;" rotation="-30 90 0"></a-entity>
 		<a-entity event-sync id="upload_button" geometry="primitive: plane; width: 1; height: 1;" position="0.64 -0.3 -0.79" scale="0.1 0.1 0.1"
 		 material="src:#upload_asset;" rotation="-30 90 0"></a-entity>
-		
-		
-		 <a-entity id="island" collada-model=" url(resources/models/island/island.dae);" scale="1 0.15 1" position="0 -1 0"></a-entity>
+
+
+		<a-entity id="island" collada-model=" url(resources/models/island/island.dae);" scale="1 0.15 1" position="0 -1 0"></a-entity>
 
 		<a-entity static-sync material="shader: html; target: #htmlElement;fps:2;" position="-8.1 2.88 -6.7" rotation="0 45.836623610465864 0"
 		 scale="1 1 1" visible="true" id="WhiteBoard" mixin="null" geometry="height:4.56;width:8.74;primitive:plane"></a-entity>
@@ -117,11 +117,11 @@
 		</a-videosphere>
 	</a-scene>
 
-	<input id="fileinput" type="file"/>
-<a id="gotoupload" href="/upload.html" target="blank"/>
+	<input id="fileinput" type="file" />
+	<a id="gotoupload" href="/upload.html" target="blank" />
 	<script>
-		function onConnect () {
-		
+		function onConnect() {
+
 			ServerManager().findServer();
 		}
 	</script>
