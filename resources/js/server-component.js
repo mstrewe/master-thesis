@@ -38,15 +38,23 @@ var ServerManager = function () {
             },
             {
                 position: '1.29 0.13 1.88',
-                rotation: '0 0 0'
+                rotation: '0 0 0',
+                color: 'brown'
             },
             {
                 position: '1.29 0.13 2.28',
-                rotation: '0 0 0'
+                rotation: '0 0 0',
+                color: 'gray'
             },
             {
                 position: '1.29 0.13 2.68',
-                rotation: '0 0 0'
+                rotation: '0 0 0',
+                color: 'rosa'
+            },
+            {
+                position: '1.29 0.13 2.68',
+                rotation: '0 0 0',
+                color: 'white'
             }];
 
 
