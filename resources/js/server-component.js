@@ -8,51 +8,51 @@ var ServerManager = function () {
     this.init = function () {
         room_positions = [
             {
-                position: '1.29 0.13 -0.68',
+                position: '0 0 0',
                 rotation: '0 0 0'
             },
             {
-                position: '1.29 0.13 -0.28',
+                position: '1 0 0',
                 rotation: '0 0 0',
                 color: 'blue'
             },
             {
-                position: '1.29 0.13 0.28',
+                position: '2 0 0',
                 rotation: '0 0 0',
                 color: 'lightblue'
             },
             {
-                position: '1.29 0.13 0.68',
+                position: '3 0 0',
                 rotation: '0 0 0',
                 color: 'pink'
             },
             {
-                position: '1.29 0.13 1.08',
+                position: '4 0 0',
                 rotation: '0 0 0',
                 color: 'red'
             },
             {
-                position: '1.29 0.13 1.48',
+                position: '5 0 0',
                 rotation: '0 0 0',
                 color: 'yellow'
             },
             {
-                position: '1.29 0.13 1.88',
+                position: '6 0 0',
                 rotation: '0 0 0',
                 color: 'brown'
             },
             {
-                position: '1.29 0.13 2.28',
+                position: '7 0 0',
                 rotation: '0 0 0',
                 color: 'gray'
             },
             {
-                position: '1.29 0.13 2.68',
+                position: '8 0 0',
                 rotation: '0 0 0',
                 color: 'rosa'
             },
             {
-                position: '1.29 0.13 2.68',
+                position: '9 0 0',
                 rotation: '0 0 0',
                 color: 'white'
             }];
@@ -98,8 +98,8 @@ var ServerManager = function () {
 
     this.makeServer = function () {
         self.is_server = true;
-        document.getElementById("player").setAttribute("position", room_positions[0].position);
-        document.getElementById("player").setAttribute("rotation", room_positions[0].rotation);
+        document.getElementById("player").setAttribute("position", "-8.1 0 -5.5");
+        document.getElementById("player").setAttribute("rotation", "0 180 0");
         document.getElementById("cursor_ring").setAttribute("material", "color: #FF0000");
         self.room_positions[0].clientId = NAF.clientId;
         window.setTimeout(function () { document.getElementById("player").components.position.data.x = document.getElementById("player").components.position.data.x + 0.00001; }, 50);
@@ -150,7 +150,8 @@ var ServerManager = function () {
             el.setAttribute("position", data.position);
             el.setAttribute("rotation", data.rotation);
             var localPlayer = $("#android");
-            var localPlayerHead = $("#players-head");
+            var localPlayerHead = $("#android-head");
+            var localCursorRing = $("#cursor_ring");
             window.setTimeout(
                 function () {
                     localPlayer.attr("collada-model", "url(resources/models/android/Android_" + data.color + ".dae);");
@@ -160,6 +161,7 @@ var ServerManager = function () {
                 function () {
                     localPlayerHead.attr("collada-model", "url(resources/models/android/Android_head_" + data.color + ".dae);");
                     localPlayerHead.attr("visible", "false");
+                    localCursorRing.attr("visible", "true");
                 }, 5000);
             //call network update
             window.setTimeout(function () { document.getElementById("player").components.position.data.x = document.getElementById("player").components.position.data.x + 0.00001; }, 50);

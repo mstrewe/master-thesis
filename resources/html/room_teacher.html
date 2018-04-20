@@ -29,21 +29,13 @@
 					selector: '#android',
 					component: 'collada-model',
 				},
-			]
-		});
-
-		NAF.schemas.add({
-			template: '#avatar-head-template',
-			components: [
-				'position',
-				'rotation',
-				'scale',
 				{
 					selector: '#android-head',
 					component: 'collada-model',
-				},
+				}
 			]
 		});
+
 	</script>
 	<a-scene networked-scene="
 	room: default;
@@ -54,13 +46,13 @@
 		<!-- asset definitons -->
 		<a-assets>
 			<script id="avatar-template" type="text/html">
-				<a-entity id="android" collada-model=" url(resources/models/android/Android.dae);" networked-audio-source scale="0.3 0.3 0.3" rotation="0 230 0" >
-				</a-entity>
-			</script>
+					<a-entity id="android" collada-model=" url(resources/models/android/Android.dae);" networked-audio-source scale="0.3 0.3 0.3" rotation="0 230 0" >
+					</a-entity>
+				</script>
 			<script id="avatar-head-template" type="text/html">
-				<a-entity id="android-head" collada-model="url(resources/models/android/Android_head.dae);" scale="0.3 0.3 0.3" rotation="0 230 0">
-				</a-entity>
-			</script>
+					<a-entity id="android-head" collada-model="url(resources/models/android/Android_head.dae);" scale="0.3 0.3 0.3" rotation="0 230 0">
+					</a-entity>
+				</script>
 			<img id="sky" src="/resources/models/island/360_sky.jpg" />
 			<video src="resources/videos/1.mp4" id="video_asset" visible="false" />
 			<img id="play_asset" src="resources/images/play.jpg" />
