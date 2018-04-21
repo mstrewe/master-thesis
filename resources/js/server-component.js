@@ -98,8 +98,8 @@ var ServerManager = function () {
 
     this.makeServer = function () {
         self.is_server = true;
-        document.getElementById("player").setAttribute("position", "-8.1 0 -5.5");
-        document.getElementById("player").setAttribute("rotation", "0 180 0");
+        document.getElementById("player").setAttribute("position", "-8.1 0 -0.8");
+        document.getElementById("player").setAttribute("rotation", "0 -90 0");
         document.getElementById("cursor_ring").setAttribute("material", "color: #FF0000");
         self.room_positions[0].clientId = NAF.clientId;
         window.setTimeout(function () { document.getElementById("player").components.position.data.x = document.getElementById("player").components.position.data.x + 0.00001; }, 50);

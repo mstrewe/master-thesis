@@ -77,28 +77,28 @@
 			</a-entity>
 		</a-entity>
 		<!--<a-entity obj-model="obj: url(resources/models/island/island.obj);mtl: url(resources/models/island/island.mtl;" position="0 0 0"></a-entity> -->
-		<a-entity event-sync id="play_button" geometry="primitive: plane; width: 1; height: 1;" position="0.64 -0.3 -0.49" scale="0.1 0.1 0.1"
-		 material="src:#play_asset;" rotation="-30 90 0"></a-entity>
-		<a-entity event-sync id="pause_button" geometry="primitive: plane; width: 1; height: 1;" position="0.64 -0.3 -0.59" scale="0.1 0.1 0.1"
-		 material="src:#pause_asset;" rotation="-30 90 0"></a-entity>
-		<a-entity event-sync id="stop_button" geometry="primitive: plane; width: 1; height: 1;" position="0.64 -0.3 -0.69" scale="0.1 0.1 0.1"
-		 material="src:#stop_asset;" rotation="-30 90 0"></a-entity>
-		<a-entity event-sync id="upload_button" geometry="primitive: plane; width: 1; height: 1;" position="0.64 -0.3 -0.79" scale="0.1 0.1 0.1"
-		 material="src:#upload_asset;" rotation="-30 90 0"></a-entity>
+		<a-entity event-sync id="play_button" geometry="primitive: plane; width: 1; height: 1;" position="-7.29	 -0.3 0.55" scale="0.1 0.1 0.1"
+		 material="src:#play_asset;" rotation="-30 -130 0"></a-entity>
+		<a-entity event-sync id="pause_button" geometry="primitive: plane; width: 1; height: 1;" position="-7.38 -0.3 0.65" scale="0.1 0.1 0.1"
+		 material="src:#pause_asset;" rotation="-30 -130 0"></a-entity>
+		<a-entity event-sync id="stop_button" geometry="primitive: plane; width: 1; height: 1;" position="-7.45	-0.3 0.73" scale="0.1 0.1 0.1"
+		 material="src:#stop_asset;" rotation="-30 -130 0"></a-entity>
+		<a-entity event-sync id="upload_button" geometry="primitive: plane; width: 1; height: 1;" position="-7.51 -0.3 0.81" scale="0.1 0.1 0.1"
+		 material="src:#upload_asset;" rotation="-30 -130 0"></a-entity>
 
 
 		<a-entity id="island" collada-model=" url(resources/models/island/island.dae);" scale="1 0.15 1" position="0 -1 0"></a-entity>
 
 		<a-entity static-sync material="shader: html; target: #htmlElement;fps:2;" position="-8.1 2.88 -6.7" rotation="0 45.836623610465864 0"
 		 scale="1 1 1" visible="true" id="WhiteBoard" mixin="null" geometry="height:4.56;width:8.74;primitive:plane"></a-entity>
-		<a-entity event-sync position="-4.17 4.78 -7.69" rotation="0 45 0" scale="1 1 1" visible="true" id="pdf_next_page" material="src:#right_asset"
+		<a-entity event-sync position="-6.14 0.46 -5.57" rotation="0 10 0" scale="1 1 1" visible="true" id="pdf_next_page" material="src:#right_asset"
 		 geometry="primitive:plane"></a-entity>
-		<a-entity event-sync position="-8.92 4.78 -2.54" rotation="0 45 0" scale="1 1 1" visible="true" id="pdf_previus_page" material="src:#left_asset"
+		<a-entity event-sync position="-8.62 0.46 -4.5" rotation="0 26 0" scale="1 1 1" visible="true" id="pdf_previus_page" material="src:#left_asset"
 		 geometry="primitive:plane"></a-entity>
-		<a-entity event-sync position="1.6 -0.3 -0.79" rotation="270 3.1799999999999997 0" scale="0.5 0.5 1" visible="true" id="pdf1"
-		 geometry="primitive:plane" material=""></a-entity>
-		<a-entity event-sync position="1.6 -0.3 -1.89" rotation="270 3.1799999999999997 0" scale="0.5 0.5 1" visible="true" id="pdf2"
-		 geometry="primitive:plane" material=""></a-entity>
+		<a-entity event-sync position="-6.1 -0.3 -1.89" rotation="0 -90 0" scale="0.5 0.5 1" visible="true" id="pdf1" geometry="primitive:plane"
+		 material=""></a-entity>
+		<a-entity event-sync position="-6.1 -0.3 -0.79" rotation="0 -90 0" scale="0.5 0.5 1" visible="true" id="pdf2" geometry="primitive:plane"
+		 material=""></a-entity>
 		<!-- Div for pdf rendering-->
 		<div style="width: 1920px; height: 1080px; position: fixed; left: 0; top: 0; z-index: -1; overflow: hidden;   text-align: center ">
 			<!-- this element is referenced by the html shader. All its content will be visible in scene -->
