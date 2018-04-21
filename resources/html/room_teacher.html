@@ -61,11 +61,14 @@
 			<img id="left_asset" src="resources/images/left.jpg" />
 			<img id="right_asset" src="resources/images/right.jpg" />
 			<img id="upload_asset" src="resources/images/upload.png" />
+			<img id="uploadhint_asset" src="resources/images/uploadhint.jpg" />
 		</a-assets>
 		<a-sky id="sky_entity" src="#sky"></a-sky>
 
 		<a-entity id="player" networked="template:#avatar-template;showLocalTemplate:false;" position="0 0.4 0" wasd-controls>
 			<a-entity id="players-head" camera look-controls networked="template:#avatar-head-template;showLocalTemplate:false" position="0 0 0">
+				<a-entity id="uploadhint" geometry="primitive: plane; width:3;height: 1;" position="2000 0 0" material="src:#uploadhint_asset;">
+				</a-entity>
 				<a-entity id="cursor_ring" cursor="fuse: true; fuseTimeout: 500" position="0 0 -0.5" geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
 				 material="color: black; shader: flat">
 					<a-animation begin="click" easing="ease-in" attribute="scale" dur="150" fill="forwards" from="0.1 0.1 0.1" to="1 1 1"></a-animation>

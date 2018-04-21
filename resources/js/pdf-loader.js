@@ -49,7 +49,8 @@ var pdfLoader = function () {
 
         $("#upload_button").click(function(e){
             // show upload hint
-            window.setTimeout(function(){$('#gotoupload')[0].click();},4000);
+            document.querySelector("#uploadhint").setAttribute("position","0 0 -2");
+            window.setTimeout(function(){window.location.href="/prepare_lesson.html";},4000);
          });
     };
 

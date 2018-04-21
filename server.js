@@ -1,6 +1,7 @@
 var connect = require('express');
 var http = require('http');
 var apiMiddleWare = require('./src/api-middleware.js');
+var  upload = require('jquery-file-upload-middleware');
 // gzip/deflate outgoing responses
 var compression = require('compression');
 var serveStatic = require('serve-static');
@@ -38,6 +39,17 @@ var serveJS = serveStatic('resources/js', {
     'index': false
 });
 
+upload.configure({
+    uploadDir: __dirname + '/public/uploads',
+    uploadUrl: '/uploads',
+    imageVersions: {
+        thumbnail: {
+            width: 80,
+            height: 80
+        }
+    }
+});
+
 //create webserver
 var app = connect();
 app.use(compression());
@@ -51,6 +63,7 @@ app.use(cookieSession({
 }));
 
 //register route handlers
+app.use('/upload', upload.fileHandler());
 app.use('/api', apiMiddleWare.handleRequest);
 app.use('/easyrtc', serveEasyRTC);
 app.use('/resources/models', serveModels);
