@@ -67,6 +67,7 @@ var ServerManager = function () {
 
         document.body.addEventListener('clientDisconnected', self.findNewServer);
 
+        NAF.connection.subscribeToDataChannel('load_pdf', self.onLoadPdf);
         //  self.findServer();
     };
 
@@ -190,6 +191,13 @@ var ServerManager = function () {
             NAF.connection.sendData(senderid, "sc_fs_r", { is_server: self.is_server });
         }
     };
+
+    this.onLoadPdf = function (senderid, dataType, data, targetID) {
+        if(senderid != NAF.clientId)
+        {
+            pdfLoader().loadUrl(data.url);
+        }
+    }
 
     return this;
 };

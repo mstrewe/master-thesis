@@ -39,6 +39,10 @@ var serveJS = serveStatic('resources/js', {
     'index': false
 });
 
+var serveFiles = serveStatic('public/uploads',{
+    'index' : false
+});
+
 upload.configure({
     uploadDir: __dirname + '/public/uploads',
     uploadUrl: '/uploads',
@@ -64,6 +68,7 @@ app.use(cookieSession({
 
 //register route handlers
 app.use('/upload', upload.fileHandler());
+app.use('/uploads',serveFiles);
 app.use('/api', apiMiddleWare.handleRequest);
 app.use('/easyrtc', serveEasyRTC);
 app.use('/resources/models', serveModels);

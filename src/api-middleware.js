@@ -14,20 +14,13 @@ module.exports = {
             }
         }
 
-        if (req._parsedUrl.pathname == "/api/upload_file" && req.method == "POST") {
+        if (req._parsedUrl.pathname == "/api/get_files" && req.method == "GET") {
             if (req.cookies.teacher_login_cookie != self.getCurrentCookie())
                 res.sendStatus(401);
-            for (var i = 0; i < 100; i++) {
+           var fileSystem = require("fs");
+           var files = fileSystem.readdirSync("public/uploads");
 
-                if (typeof (req.body[("file_" + i)]) != 'undefined') {
-                    //parse file
-
-                    //save file
-                    var fs = require("fs");
-                    fs.writeFile(self.getCurrentCookie() + "/file1", fileData);
-                }
-            }
-
+           responseObject = files;
         }
 
         res.status(200).json(responseObject);

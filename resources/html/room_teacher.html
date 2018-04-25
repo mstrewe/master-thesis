@@ -95,10 +95,18 @@
 		 geometry="primitive:plane"></a-entity>
 		<a-entity event-sync position="-8.62 0.46 -4.5" rotation="0 26 0" scale="1 1 1" visible="true" id="pdf_previus_page" material="src:#left_asset"
 		 geometry="primitive:plane"></a-entity>
-		<a-entity event-sync position="-6.1 -0.3 -1.89" rotation="0 -90 0" scale="0.5 0.5 1" visible="true" id="pdf1" geometry="primitive:plane"
-		 material=""></a-entity>
-		<a-entity event-sync position="-6.1 -0.3 -0.79" rotation="0 -90 0" scale="0.5 0.5 1" visible="true" id="pdf2" geometry="primitive:plane"
-		 material=""></a-entity>
+		<a-entity event-sync position="-6.1 -0.3 -1.89" rotation="0 -90 0" visible="true" id="pdfDialogOpener" geometry="primitive:plane;width:1;height:0.5;"
+		 material="">
+			<a-text position="-0.3 0 0" color="black" value="PDF Menue" width="3"></a-text>
+		</a-entity>
+		<a-entity event-sync position="-7.1 -0.3 -3.89" rotation="0 -90 0" visible="true" id="pdfLoader" geometry="primitive:plane;width:1;height:0.5;"
+		 material="">
+		</a-entity>
+
+		<a-entity id="PDFLoaderDialog" visible="false" rotation="0 -103 0" position="-6.26 -4000 -0.14">
+
+		</a-entity>
+
 		<!-- Div for pdf rendering-->
 		<div style="width: 1920px; height: 1080px; position: fixed; left: 0; top: 0; z-index: -1; overflow: hidden;   text-align: center ">
 			<!-- this element is referenced by the html shader. All its content will be visible in scene -->
