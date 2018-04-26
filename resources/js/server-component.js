@@ -8,7 +8,8 @@ var ServerManager = {
         room_positions = [
             {
                 position: '0 0 0',
-                rotation: '0 0 0'
+                rotation: '0 0 0',
+                color: ""
             },
             {
                 position: '1 0 0',
@@ -56,15 +57,8 @@ var ServerManager = {
                 color: 'white'
             }];
 
-
-
-        NAF.connection.subscribeToDataChannel('sc_fs', ServerManager.onFindServerRequest);
-        NAF.connection.subscribeToDataChannel('sc_fs_r', ServerManager.onFindServerResponse);
-
         NAF.connection.subscribeToDataChannel('sc_gp', ServerManager.onGetPosition);
         NAF.connection.subscribeToDataChannel('sc_gp_r', ServerManager.onGetPositionResponse);
-
-        document.body.addEventListener('clientDisconnected', ServerManager.findNewServer);
 
         NAF.connection.subscribeToDataChannel('load_pdf', ServerManager.onLoadPdf);
         //  self.findServer();
@@ -88,10 +82,9 @@ var ServerManager = {
     },
 
     broadcastFindServer: function () {
-        if (Object.keys(NAF.connection.connectedClients).length === 0) {
+        if (document.cookie.indexOf('teacher_login_cookie') > -1 && window.location.href.indexOf('room_teacher.html') > -1) {
             ServerManager.makeServer();
-        }
-        else {
+        } else {
             NAF.connection.broadcastData("sc_gp", {});
         }
     },
