@@ -17,7 +17,7 @@
 
 </head>
 
-<body onload="pdfLoader().init(); ServerManager().init();">
+<body onload="pdfLoader.init(); ServerManager.init();">
 	<script>
 		NAF.schemas.add({
 			template: '#avatar-template',
@@ -125,7 +125,7 @@
 	<script>
 		function onConnect() {
 
-			ServerManager().findServer();
+			ServerManager.findServer();
 		}
 	</script>
 

@@ -1,15 +1,13 @@
-var pdfLoader = function () {
-    this.documentCache = { url: {}, pdf: {}, page: 0 };
+var pdfLoader = {
+    documentCache: { url: {}, pdf: {}, page: 0 },
 
-    var self = this;
-
-    this.init = function () {
+    init: function () {
         document.getElementById('pdf_next_page').addEventListener('click', function (evt) {
-            self.nextPage();
+            pdfLoader.nextPage();
             console.log('Next page clicked: ', evt.detail.intersection.point);
         });
         document.getElementById('pdf_previus_page').addEventListener('click', function (evt) {
-            self.previusPage();
+            pdfLoader.previusPage();
             console.log('Previus page clicked: ', evt.detail.intersection.point);
         });
         if (document.getElementById('pdfDialogOpener') != null)
@@ -40,7 +38,7 @@ var pdfLoader = function () {
                                         </a - entity > ');
                                             $('#PDFLoaderDialog').append(el);
                                             el[0].addEventListener('click', function () {
-                                                self.loadUrl("/uploads/" + element);
+                                                pdfLoader.loadUrl("/uploads/" + element);
                                             });
                                             iter -= 0.2;
                                         }
@@ -86,22 +84,22 @@ var pdfLoader = function () {
         });
 
 
-    };
+    },
 
-    this.loadUrl = function (url) {
+    loadUrl: function (url) {
 
         $('#PDFLoaderDialog').attr("visible", "false");
         $('#PDFLoaderDialog').attr("position", "-6.26 -3000 -0.14");
 
-        if (ServerManager().is_server)
+        if (ServerManager.is_server)
             NAF.connection.broadcastData("load_pdf", { url: url });
 
         // Asynchronous download PDF
         pdfjsLib.getDocument(url)
             .then(function (pdf) {
-                self.documentCache.url = url;
-                self.documentCache.pdf = pdf;
-                self.documentCache.page = 1;
+                pdfLoader.documentCache.url = url;
+                pdfLoader.documentCache.pdf = pdf;
+                pdfLoader.documentCache.page = 1;
                 return pdf.getPage(1);
             })
             .then(function (page) {
@@ -130,12 +128,12 @@ var pdfLoader = function () {
                 // Render PDF page
                 page.render(renderContext);
             });
-    };
+    },
 
-    this.nextPage = function () {
-        self.documentCache.pdf.getPage(self.documentCache.page + 1).then(function (page) {
+    nextPage: function () {
+        pdfLoader.documentCache.pdf.getPage(pdfLoader.documentCache.page + 1).then(function (page) {
             //increment page in cache
-            self.documentCache.page++;
+            pdfLoader.documentCache.page++;
 
             // Set scale (zoom) level
             var scale = 1.5;
@@ -162,14 +160,14 @@ var pdfLoader = function () {
             // Render PDF page
             page.render(renderContext);
         });
-    };
+    },
 
-    this.previusPage = function () {
-        if (self.documentCache.page - 1 === 0)
+    previusPage: function () {
+        if (pdfLoader.documentCache.page - 1 === 0)
             return;
-        self.documentCache.pdf.getPage(self.documentCache.page - 1).then(function (page) {
+        pdfLoader.documentCache.pdf.getPage(pdfLoader.documentCache.page - 1).then(function (page) {
             // decrement page in cache
-            self.documentCache.page--;
+            pdfLoader.documentCache.page--;
 
             // Set scale (zoom) level
             var scale = 1.5;
@@ -196,7 +194,5 @@ var pdfLoader = function () {
             // Render PDF page
             page.render(renderContext);
         });
-    };
-
-    return this;
+    }
 };

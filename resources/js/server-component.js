@@ -1,11 +1,10 @@
-var ServerManager = function () {
+var ServerManager = {
 
-    var self = this;
-    this.room_positions;
-    this.is_server = false;
-    this.clientCount = 0;
+    room_positions: {},
+    is_server: false,
+    clientCount: 0,
 
-    this.init = function () {
+    init: function () {
         room_positions = [
             {
                 position: '0 0 0',
@@ -59,64 +58,64 @@ var ServerManager = function () {
 
 
 
-        NAF.connection.subscribeToDataChannel('sc_fs', self.onFindServerRequest);
-        NAF.connection.subscribeToDataChannel('sc_fs_r', self.onFindServerResponse);
+        NAF.connection.subscribeToDataChannel('sc_fs', ServerManager.onFindServerRequest);
+        NAF.connection.subscribeToDataChannel('sc_fs_r', ServerManager.onFindServerResponse);
 
-        NAF.connection.subscribeToDataChannel('sc_gp', self.onGetPosition);
-        NAF.connection.subscribeToDataChannel('sc_gp_r', self.onGetPositionResponse);
+        NAF.connection.subscribeToDataChannel('sc_gp', ServerManager.onGetPosition);
+        NAF.connection.subscribeToDataChannel('sc_gp_r', ServerManager.onGetPositionResponse);
 
-        document.body.addEventListener('clientDisconnected', self.findNewServer);
+        document.body.addEventListener('clientDisconnected', ServerManager.findNewServer);
 
-        NAF.connection.subscribeToDataChannel('load_pdf', self.onLoadPdf);
+        NAF.connection.subscribeToDataChannel('load_pdf', ServerManager.onLoadPdf);
         //  self.findServer();
-    };
+    },
 
-    this.findNewServer = function () {
+    findNewServer: function () {
         NAF.connection.broadcastData("sc_fs", {});
-    };
+    },
 
-    this.findServer = function () {
+    findServer: function () {
         clientCount = 0;
         if (NAF.connection.isConnected() == false) {
             window.setTimeout(() => {
-                self.findServer();
+                ServerManager.findServer();
             }, 200);
             return;
         }
         window.setTimeout(() => {
-            self.broadcastFindServer();
+            ServerManager.broadcastFindServer();
         }, 500);
-    };
+    },
 
-    this.broadcastFindServer = function () {
+    broadcastFindServer: function () {
         if (Object.keys(NAF.connection.connectedClients).length === 0) {
-            self.makeServer();
+            ServerManager.makeServer();
         }
         else {
             NAF.connection.broadcastData("sc_gp", {});
         }
-    }
+    },
 
-    this.makeServer = function () {
-        self.is_server = true;
+    makeServer: function () {
+        ServerManager.is_server = true;
         document.getElementById("player").setAttribute("position", "-8.1 0 -0.8");
         document.getElementById("player").setAttribute("rotation", "0 -90 0");
         document.getElementById("cursor_ring").setAttribute("material", "color: #FF0000");
-        self.room_positions[0].clientId = NAF.clientId;
+        ServerManager.room_positions[0].clientId = NAF.clientId;
         window.setTimeout(function () { document.getElementById("player").components.position.data.x = document.getElementById("player").components.position.data.x + 0.00001; }, 50);
 
-    }
+    },
 
-    this.findNextPosition = function (initiator) {
+    findNextPosition: function (initiator) {
         for (var i = 0; i < room_positions.length; i++) {
             if (!(room_positions[i].clientId)) {
                 room_positions[i].clientId = initiator;
                 return room_positions[i];
             }
         }
-    };
+    },
 
-    this.electServer = function () {
+    electServer: function () {
         var clientIDs = new Array();
         clientIDs.push(NAF.clientId)
         for (var k in NAF.connection.activeDataChannels) {
@@ -127,25 +126,25 @@ var ServerManager = function () {
         //sort
         clientIDs.sort();
         if (clientIDs[0] === NAF.clientId)
-            self.makeServer();
+            ServerManager.makeServer();
         else {
             window.setTimeout(() => {
-                self.findServer();
+                ServerManager.findServer();
             }, 1100);
         }
-    };
+    },
 
-    this.onGetPosition = function (senderid, dataType, data, targetID) {
+    onGetPosition: function (senderid, dataType, data, targetID) {
         if (senderid != NAF.clientId) {
-            if (is_server === false)
+            if (ServerManager.is_server === false)
                 return;
-            var pos = self.findNextPosition(senderid);
+            var pos = ServerManager.findNextPosition(senderid);
             NAF.connection.sendData(senderid, "sc_gp_r", pos);
             //colorize the model
         }
-    };
+    },
 
-    this.onGetPositionResponse = function (senderid, dataType, data, targetID) {
+    onGetPositionResponse: function (senderid, dataType, data, targetID) {
         if (senderid != NAF.clientId) {
             var el = document.getElementById("player");
             el.setAttribute("position", data.position);
@@ -167,14 +166,14 @@ var ServerManager = function () {
             //call network update
             window.setTimeout(function () { document.getElementById("player").components.position.data.x = document.getElementById("player").components.position.data.x + 0.00001; }, 50);
         }
-    };
+    },
 
-    this.onFindServerResponse = function (senderid, dataType, data, targetID) {
+    onFindServerResponse: function (senderid, dataType, data, targetID) {
         if (senderid != NAF.clientId) {
             if (data.is_server == true)
-                self.is_server = false;
+                thServerManageris.is_server = false;
             else
-                self.clientCount += 1;
+                ServerManager.clientCount += 1;
         }
         var activeConnections = 0;
         for (var k in NAF.connection.activeDataChannels) {
@@ -182,23 +181,20 @@ var ServerManager = function () {
                 activeConnections++;
         }
 
-        if (self.clientCount == activeConnections && self.is_server == false)
-            self.electServer();
-    };
+        if (ServerManager.clientCount == activeConnections && ServerManager.is_server == false)
+            ServerManager.electServer();
+    },
 
-    this.onFindServerRequest = function (senderid, dataType, data, targetID) {
+    onFindServerRequest: function (senderid, dataType, data, targetID) {
         if (senderid != NAF.clientId) {
-            NAF.connection.sendData(senderid, "sc_fs_r", { is_server: self.is_server });
+            NAF.connection.sendData(senderid, "sc_fs_r", { is_server: ServerManager.is_server });
         }
-    };
+    },
 
-    this.onLoadPdf = function (senderid, dataType, data, targetID) {
-        if(senderid != NAF.clientId)
-        {
-            pdfLoader().loadUrl(data.url);
+    onLoadPdf: function (senderid, dataType, data, targetID) {
+        if (senderid != NAF.clientId) {
+            pdfLoader.loadUrl(data.url);
         }
     }
-
-    return this;
 };
 
