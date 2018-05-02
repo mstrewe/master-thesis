@@ -26,11 +26,19 @@
 				'scale',
 				{
 					selector: '#android',
-					component: 'collada-model',
+					component: 'collada-model'
 				},
 				{
 					selector: '#android-head',
-					component: 'collada-model',
+					component: 'collada-model'
+				},
+				{
+					selector: '#android-head',
+					component: 'scale'
+				},
+				{
+					selector: '#android',
+					component: 'scale'
 				}
 			]
 		});
@@ -41,6 +49,7 @@
 	room: default;
 	debug: true;
 	adapter: easyrtc;
+	connectOnLoad: false;
 	audio : true;
 	serverURL: http://localhost:8080/;" inspector="url: https://aframe.io/releases/0.3.0/aframe-inspector.min.js">
 		<!-- asset definitons -->

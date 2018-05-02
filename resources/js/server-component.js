@@ -7,52 +7,52 @@ var ServerManager = {
     init: function () {
         room_positions = [
             {
-                position: '0 0 0',
+                position: '-6 0 3',
                 rotation: '0 0 0',
-                color: ""
+                color: "green"
             },
             {
-                position: '1 0 0',
+                position: '-5 0 2',
                 rotation: '0 0 0',
                 color: 'blue'
             },
             {
-                position: '2 0 0',
+                position: '-4 0 1',
                 rotation: '0 0 0',
                 color: 'lightblue'
             },
             {
-                position: '3 0 0',
+                position: '-3 0 0',
                 rotation: '0 0 0',
                 color: 'pink'
             },
             {
-                position: '4 0 0',
+                position: '-2 0 -1',
                 rotation: '0 0 0',
                 color: 'red'
             },
             {
-                position: '5 0 0',
+                position: '-1 0 -2',
                 rotation: '0 0 0',
                 color: 'yellow'
             },
             {
-                position: '6 0 0',
+                position: '0 0 -3',
                 rotation: '0 0 0',
                 color: 'brown'
             },
             {
-                position: '7 0 0',
+                position: '1 0 -4',
                 rotation: '0 0 0',
                 color: 'gray'
             },
             {
-                position: '8 0 0',
+                position: '2 0 -5',
                 rotation: '0 0 0',
                 color: 'rosa'
             },
             {
-                position: '9 0 0',
+                position: '3 0 -6',
                 rotation: '0 0 0',
                 color: 'white'
             }];
@@ -62,6 +62,7 @@ var ServerManager = {
 
         NAF.connection.subscribeToDataChannel('load_pdf', ServerManager.onLoadPdf);
         //  self.findServer();
+        AFRAME.scenes[0].emit('connect');
     },
 
     findNewServer: function () {
@@ -106,6 +107,12 @@ var ServerManager = {
                 return room_positions[i];
             }
         }
+        return {
+            position: '4 0 -7',
+            rotation: '0 0 0',
+            color: 'rosa',
+            unvisible: true
+        };
     },
 
     electServer: function () {
@@ -145,17 +152,29 @@ var ServerManager = {
             var localPlayer = $("#android");
             var localPlayerHead = $("#android-head");
             var localCursorRing = $("#cursor_ring");
-            window.setTimeout(
-                function () {
-                    localPlayer.attr("collada-model", "url(resources/models/android/Android_" + data.color + ".dae);");
-                    localPlayer.attr("visible", "false");
-                }, 5000);
-            window.setTimeout(
-                function () {
-                    localPlayerHead.attr("collada-model", "url(resources/models/android/Android_head_" + data.color + ".dae);");
-                    localPlayerHead.attr("visible", "false");
-                    localCursorRing.attr("visible", "true");
-                }, 5000);
+            if (!data.unvisible) {
+                window.setTimeout(
+                    function () {
+                        if (data.color != "green")
+                            localPlayer.attr("collada-model", "url(resources/models/android/Android_" + data.color + ".dae);");
+                        localPlayer.attr("visible", "false");
+                    }, 5000);
+                window.setTimeout(
+                    function () {
+                        if (data.color != "green")
+                            localPlayerHead.attr("collada-model", "url(resources/models/android/Android_head_" + data.color + ".dae);");
+                        localPlayerHead.attr("visible", "false");
+                        localCursorRing.attr("visible", "true");
+                        localCursorRing.attr("material", "color: " + data.color + "; shader: flat");
+                    }, 5000);
+            } else {
+                window.setTimeout(
+                    function () {
+                        localPlayer.attr("visible", "false");
+                        localPlayer.attr("scale", "0.0001 0.0001 0.0001");
+                        localPlayerHead.attr("scale", "0.0001 0.0001 0.0001");
+                    }, 5000);
+            }
             //call network update
             window.setTimeout(function () { document.getElementById("player").components.position.data.x = document.getElementById("player").components.position.data.x + 0.00001; }, 50);
         }
