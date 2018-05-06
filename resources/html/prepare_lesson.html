@@ -1,64 +1,83 @@
 <html>
 
 <head>
-<!-- jQuery UI styles -->
-<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/dark-hive/jquery-ui.css" id="theme">
-<!-- Generic page styles -->
-<link rel="stylesheet" href="/resources/js/jquery-file-upload/css/style.css">
-<!-- Demo styles -->
-<link rel="stylesheet" href="/resources/js/jquery-file-upload/css/jquery-ui-demo.css">
-<!--[if lte IE 8]>
+    <!-- jQuery UI styles -->
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/dark-hive/jquery-ui.css" id="theme">
+    <!-- Generic page styles -->
+    <link rel="stylesheet" href="/resources/js/jquery-file-upload/css/style.css">
+    <!-- Demo styles -->
+    <link rel="stylesheet" href="/resources/js/jquery-file-upload/css/jquery-ui-demo.css">
+    <!--[if lte IE 8]>
 <link rel="stylesheet" href="/resources/js/jquery-file-upload/css/jquery-ui-demo-ie8.css">
 <![endif]-->
-<style>
-/* Adjust the jQuery UI widget font-size: */
-.ui-widget {
-    font-size: 0.95em;
-}
-</style>
-<!-- blueimp Gallery styles -->
-<link rel="stylesheet" href="https://blueimp.github.io/Gallery/css/blueimp-gallery.min.css">
-<!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
-<link rel="stylesheet" href="/resources/js/jquery-file-upload/css/jquery.fileupload.css">
-<link rel="stylesheet" href="/resources/js/jquery-file-upload/css/jquery.fileupload-ui.css">
-<!-- CSS adjustments for browsers with JavaScript disabled -->
-<noscript><link rel="stylesheet" href="/resources/js/jquery-file-upload/css/jquery.fileupload-noscript.css"></noscript>
-<noscript><link rel="stylesheet" href="/resources/js/jquery-file-upload/css/jquery.fileupload-ui-noscript.css"></noscript>
+    <style>
+        /* Adjust the jQuery UI widget font-size: */
+
+        .ui-widget {
+            font-size: 0.95em;
+        }
+    </style>
+    <!-- blueimp Gallery styles -->
+    <link rel="stylesheet" href="https://blueimp.github.io/Gallery/css/blueimp-gallery.min.css">
+    <!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
+    <link rel="stylesheet" href="/resources/js/jquery-file-upload/css/jquery.fileupload.css">
+    <link rel="stylesheet" href="/resources/js/jquery-file-upload/css/jquery.fileupload-ui.css">
+    <!-- CSS adjustments for browsers with JavaScript disabled -->
+    <noscript>
+        <link rel="stylesheet" href="/resources/js/jquery-file-upload/css/jquery.fileupload-noscript.css">
+    </noscript>
+    <noscript>
+        <link rel="stylesheet" href="/resources/js/jquery-file-upload/css/jquery.fileupload-ui-noscript.css">
+    </noscript>
 </head>
 
 <body>
-        <form id="fileupload" action="/upload" method="POST" enctype="multipart/form-data">
-            <!-- Redirect browsers with JavaScript disabled to the origin page -->
-            <noscript><input type="hidden" name="redirect" value="https://blueimp.github.io/jQuery-File-Upload/"></noscript>
-            <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
-            <div class="fileupload-buttonbar">
-                <div class="fileupload-buttons">
-                    <!-- The fileinput-button span is used to style the file input field as button -->
-                    <span class="fileinput-button">
-                        <span>Add files...</span>
-                        <input type="file" name="files[]" multiple>
-                    </span>
-                    <button type="submit" class="start">Start upload</button>
-                    <button type="reset" class="cancel">Cancel upload</button>
-                    <button type="button" class="delete">Delete</button>
-                    <button type="button" class="start" onclick='window.location.href="/room_teacher.html"'>Zurück zum Klassenraum</button>
-                    <input type="checkbox" class="toggle">
-                    <!-- The global file processing state -->
-                    <span class="fileupload-process"></span>
-                </div>
-                <!-- The global progress state -->
-                <div class="fileupload-progress fade" style="display:none">
-                    <!-- The global progress bar -->
-                    <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
-                    <!-- The extended global progress state -->
-                    <div class="progress-extended">&nbsp;</div>
-                </div>
+    <form id="fileupload" action="/upload" method="POST" enctype="multipart/form-data">
+        <!-- Redirect browsers with JavaScript disabled to the origin page -->
+        <noscript>
+            <input type="hidden" name="redirect" value="https://blueimp.github.io/jQuery-File-Upload/">
+        </noscript>
+        <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
+        <div class="fileupload-buttonbar">
+            <div class="fileupload-buttons">
+                <!-- The fileinput-button span is used to style the file input field as button -->
+                <span class="fileinput-button">
+                    <span>Add files...</span>
+                    <input type="file" accept="application/pdf,.mp4" name="files[]" multiple>
+                </span>
             </div>
-            <!-- The table listing the files available for upload/download -->
-            <table role="presentation"><tbody class="files"></tbody></table>
-        </form>
-        <!-- The template to display files available for upload -->
-<script id="template-upload" type="text/x-tmpl">
+            <div class="fileupload-buttons">
+
+                <button type="submit" class="start">Start upload</button>
+            </div>
+            <div class="fileupload-buttons">
+
+                <button type="reset" class="cancel">Cancel upload</button>
+                <button type="button" class="delete">Delete</button>
+            </div>
+            <div class="fileupload-buttons">
+
+                <button type="button" class="start" onclick='window.location.href="/room_teacher.html"'>Zurück zum Klassenraum</button>
+            </div>
+            <input type="checkbox" class="toggle">
+            <!-- The global file processing state -->
+            <span class="fileupload-process"></span>
+        </div>
+        <!-- The global progress state -->
+        <div class="fileupload-progress fade" style="display:none">
+            <!-- The global progress bar -->
+            <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+            <!-- The extended global progress state -->
+            <div class="progress-extended">&nbsp;</div>
+        </div>
+        </div>
+        <!-- The table listing the files available for upload/download -->
+        <table role="presentation">
+            <tbody class="files"></tbody>
+        </table>
+    </form>
+    <!-- The template to display files available for upload -->
+    <script id="template-upload" type="text/x-tmpl">
     {% for (var i=0, file; file=o.files[i]; i++) { %}
         <tr class="template-upload fade">
             <td>
@@ -143,17 +162,17 @@
     <!-- The main application script -->
     <script src="/resources/js/jquery-file-upload/js/main.js"></script>
     <script>
-    // Initialize the jQuery UI theme switcher:
-    $('#theme-switcher').change(function () {
-        var theme = $('#theme');
-        theme.prop(
-            'href',
-            theme.prop('href').replace(
-                /[\w\-]+\/jquery-ui.css/,
-                $(this).val() + '/jquery-ui.css'
-            )
-        );
-    });
+        // Initialize the jQuery UI theme switcher:
+        $('#theme-switcher').change(function () {
+            var theme = $('#theme');
+            theme.prop(
+                'href',
+                theme.prop('href').replace(
+                    /[\w\-]+\/jquery-ui.css/,
+                    $(this).val() + '/jquery-ui.css'
+                )
+            );
+        });
     </script>
     <!-- The XDomainRequest Transport is included for cross-domain file deletion for IE 8 and IE 9 -->
     <!--[if (gte IE 8)&(lt IE 10)]>
