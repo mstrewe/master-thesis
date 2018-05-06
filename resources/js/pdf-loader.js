@@ -30,16 +30,30 @@ var pdfLoader = {
                                             const element = response[item];
                                             //  $('#PDFLoaderDialog').append('<a-entity position = "0 ' + iter + '" 0" color="white" text="width: 3; value:' + element + '"></a-entity>');
                                             var el = $('<a-entity \
-                                        position = "0 ' + iter + '" 0" \
-                                        geometry = "primitive: plane; height: auto; width: auto" \
-                                        material = "color: blue" \
-                                        text = "width: 3; value: '+ element + '" > \
-                                        event-sync \
-                                        </a - entity > ');
+                                                position = "0 ' + iter + '" 0" \
+                                                geometry = "primitive: plane; height: auto; width: auto" \
+                                                material = "color: blue" \
+                                                text = "width: 3; value: '+ element + '" > \
+                                                event-sync \
+                                                </a - entity > ');
                                             $('#PDFLoaderDialog').append(el);
-                                            el[0].addEventListener('click', function () {
-                                                pdfLoader.loadUrl("/uploads/" + element);
-                                            });
+                                            var fileUrl = "/uploads/" + element;
+                                            if (element.endsWith('mp4')) {
+                                                el[0].addEventListener('click', function () {
+
+                                                    $('video').attr("src",fileUrl);
+                                                    $('#PDFLoaderDialog').attr("visible", "false");
+                                                    $('#PDFLoaderDialog').attr("position", "-6.26 -3000 -0.14");
+                                                    if (ServerManager.is_server)
+                                                        NAF.connection.broadcastData("load_mp4", { url: fileUrl });
+                                                });
+                                            } else if (element.endsWith("pdf")) {
+                                                el[0].addEventListener('click', function () {
+                                                    pdfLoader.loadUrl(fileUrl);
+                                                    $('#PDFLoaderDialog').attr("visible", "false");
+                                                    $('#PDFLoaderDialog').attr("position", "-6.26 -3000 -0.14");
+                                                });
+                                            }
                                             iter -= 0.2;
                                         }
                                     }
@@ -88,8 +102,7 @@ var pdfLoader = {
 
     loadUrl: function (url) {
 
-        $('#PDFLoaderDialog').attr("visible", "false");
-        $('#PDFLoaderDialog').attr("position", "-6.26 -3000 -0.14");
+
 
         if (ServerManager.is_server)
             NAF.connection.broadcastData("load_pdf", { url: url });

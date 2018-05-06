@@ -24,7 +24,6 @@ module.exports = {
                 res.sendStatus(401);
             var fileSystem = require("fs");
             var files = fileSystem.readdirSync("public/uploads");
-
             responseObject = files;
         }
 

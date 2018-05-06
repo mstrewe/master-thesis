@@ -61,6 +61,7 @@ var ServerManager = {
         NAF.connection.subscribeToDataChannel('sc_gp_r', ServerManager.onGetPositionResponse);
 
         NAF.connection.subscribeToDataChannel('load_pdf', ServerManager.onLoadPdf);
+        NAF.connection.subscribeToDataChannel('load_mp4', ServerManager.onLoadMp4);
         //  self.findServer();
         AFRAME.scenes[0].emit('connect');
     },
@@ -206,6 +207,13 @@ var ServerManager = {
     onLoadPdf: function (senderid, dataType, data, targetID) {
         if (senderid != NAF.clientId) {
             pdfLoader.loadUrl(data.url);
+        }
+    },
+
+    onLoadMp4: function (senderid, dataType, data, targetID) {
+        if (senderid != NAF.clientId) {
+            $('video').attr("src", data.url);
+
         }
     }
 };
