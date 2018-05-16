@@ -41,7 +41,7 @@ var pdfLoader = {
                                             if (element.endsWith('mp4')) {
                                                 el[0].addEventListener('click', function () {
 
-                                                    $('video').attr("src",fileUrl);
+                                                    $('video').attr("src", fileUrl);
                                                     $('#PDFLoaderDialog').attr("visible", "false");
                                                     $('#PDFLoaderDialog').attr("position", "-6.26 -3000 -0.14");
                                                     if (ServerManager.is_server)
@@ -97,7 +97,13 @@ var pdfLoader = {
             window.setTimeout(function () { window.location.href = "/prepare_lesson.html"; }, 4000);
         });
 
-
+        if (document.getElementById('melden_button') != null)
+            document.getElementById('melden_button').addEventListener('click', function (evt) {
+                document.querySelector("#players-q").setAttribute("position", "0 0.2 0");
+                window.setTimeout(function () {
+                    document.querySelector("#players-q").setAttribute("position", "2000 0.2 0");
+                }, 5000);
+            });
     },
 
     loadUrl: function (url) {
