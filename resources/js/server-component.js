@@ -12,47 +12,47 @@ var ServerManager = {
                 color: "green"
             },
             {
-                position: '-5 0 2',
+                position: '-5.5 0 2.5',
                 rotation: '0 0 0',
                 color: 'blue'
             },
             {
-                position: '-4 0 1',
+                position: '-5 0 2',
                 rotation: '0 0 0',
                 color: 'lightblue'
             },
             {
-                position: '-3 0 0',
+                position: '-4.5 0 1.5',
                 rotation: '0 0 0',
                 color: 'pink'
             },
             {
-                position: '-2 0 -1',
+                position: '-4 0 1',
                 rotation: '0 0 0',
                 color: 'red'
             },
             {
-                position: '-1 0 -2',
+                position: '-3.5 0 0.5',
                 rotation: '0 0 0',
                 color: 'yellow'
             },
             {
-                position: '0 0 -3',
+                position: '-3 0 0',
                 rotation: '0 0 0',
                 color: 'brown'
             },
             {
-                position: '1 0 -4',
+                position: '-2.5 0 -0.5',
                 rotation: '0 0 0',
                 color: 'gray'
             },
             {
-                position: '2 0 -5',
+                position: '-2 0 -1',
                 rotation: '0 0 0',
                 color: 'rosa'
             },
             {
-                position: '3 0 -6',
+                position: '-1.5 0 -1.5',
                 rotation: '0 0 0',
                 color: 'white'
             }];
@@ -63,7 +63,7 @@ var ServerManager = {
         NAF.connection.subscribeToDataChannel('load_pdf', ServerManager.onLoadPdf);
         NAF.connection.subscribeToDataChannel('load_mp4', ServerManager.onLoadMp4);
         //  self.findServer();
-        AFRAME.scenes[0].emit('connect');
+       // AFRAME.scenes[0].emit('connect');
     },
 
     findNewServer: function () {
@@ -92,11 +92,11 @@ var ServerManager = {
     },
 
     makeServer: function () {
-        ServerManager.is_server = true;
+        is_server = true;
         document.getElementById("player").setAttribute("position", "-8.1 0 -0.8");
         document.getElementById("player").setAttribute("rotation", "0 -90 0");
         document.getElementById("cursor_ring").setAttribute("material", "color: #FF0000");
-        ServerManager.room_positions[0].clientId = NAF.clientId;
+        room_positions[0].clientId = NAF.clientId;
         window.setTimeout(function () { document.getElementById("player").components.position.data.x = document.getElementById("player").components.position.data.x + 0.00001; }, 50);
 
     },
@@ -137,7 +137,7 @@ var ServerManager = {
 
     onGetPosition: function (senderid, dataType, data, targetID) {
         if (senderid != NAF.clientId) {
-            if (ServerManager.is_server === false)
+            if (typeof(is_server) == "undefined" || is_server === false)
                 return;
             var pos = ServerManager.findNextPosition(senderid);
             NAF.connection.sendData(senderid, "sc_gp_r", pos);
@@ -178,29 +178,6 @@ var ServerManager = {
             }
             //call network update
             window.setTimeout(function () { document.getElementById("player").components.position.data.x = document.getElementById("player").components.position.data.x + 0.00001; }, 50);
-        }
-    },
-
-    onFindServerResponse: function (senderid, dataType, data, targetID) {
-        if (senderid != NAF.clientId) {
-            if (data.is_server == true)
-                thServerManageris.is_server = false;
-            else
-                ServerManager.clientCount += 1;
-        }
-        var activeConnections = 0;
-        for (var k in NAF.connection.activeDataChannels) {
-            if (NAF.connection.activeDataChannels[k] === true)
-                activeConnections++;
-        }
-
-        if (ServerManager.clientCount == activeConnections && ServerManager.is_server == false)
-            ServerManager.electServer();
-    },
-
-    onFindServerRequest: function (senderid, dataType, data, targetID) {
-        if (senderid != NAF.clientId) {
-            NAF.connection.sendData(senderid, "sc_fs_r", { is_server: ServerManager.is_server });
         }
     },
 

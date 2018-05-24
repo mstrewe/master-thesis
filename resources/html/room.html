@@ -16,8 +16,15 @@
 	<script src="resources/js/server-component.js"></script>
 </head>
 
-<body onload="pdfLoader.init(); ServerManager.init();">
-	<script>
+<body onload="">
+	<script> 
+
+		function onConnect() {
+			pdfLoader.init();
+			ServerManager.init();
+			ServerManager.findServer();
+		}
+
 		NAF.options.useLerp = false;
 		NAF.schemas.add({
 			template: '#avatar-template',
@@ -50,7 +57,7 @@
 	room: default;
 	debug: true;
 	adapter: easyrtc;
-	connectOnLoad: false;
+	onConnect: onConnect;
 	audio : true;
 	serverURL: http://localhost:8080/;" inspector="url: https://aframe.io/releases/0.3.0/aframe-inspector.min.js">
 		<!-- asset definitons -->
@@ -80,10 +87,11 @@
 		</a-assets>
 		<a-sky id="sky_entity" src="#sky"></a-sky>
 
-		<a-entity id="player" networked="template:#avatar-template;showLocalTemplate:false;" position="0 0.4 0" wasd-controls>
+		<a-entity id="player" networked="template:#avatar-template;showLocalTemplate:false;" rotation="0 90 0" position="0 0.4 0"
+		 wasd-controls>
 			<a-entity id="melden_button" geometry="primitive: plane; width: 1; height: 1;" position="-0.06 -0.02 -0.73" scale="0.1 0.1 0.1"
 			 material="src:#melden_asset;" rotation="0 0 0"></a-entity>
-			<a-entity id="players-q" networked="template:#q-template;showLocalTemplate:false" position="2000 0.2 0"></a-entity>
+			<a-entity id="players-q" networked="template:#q-template;showLocalTemplate:false" rotation="0 90 0" position="2000 0.2 0"></a-entity>
 			<a-entity id="players-head" camera look-controls networked="template:#avatar-head-template;showLocalTemplate:false" position="0 0 0">
 				<a-entity id="uploadhint" geometry="primitive: plane; width:3;height: 1;" position="2000 0 0" material="src:#uploadhint_asset;">
 				</a-entity>
@@ -126,12 +134,7 @@
 		<a-videosphere visible="false" src="#video_asset">
 		</a-videosphere>
 	</a-scene>
-	<script>
-		function onConnect() {
 
-			ServerManager.findServer();
-		}
-	</script>
 
 </body>
 

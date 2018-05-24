@@ -17,10 +17,16 @@
 
 </head>
 
-<body onload="pdfLoader.init(); ServerManager.init();">
+<body onload="">
 	<script>
+		function onConnect() {
+			pdfLoader.init();
+			ServerManager.init();
+			ServerManager.findServer();
+
+		}
 		NAF.options.useLerp = false;
-	
+
 		NAF.schemas.add({
 			template: '#avatar-template',
 			components: [
@@ -50,7 +56,7 @@
 	room: default;
 	debug: true;
 	adapter: easyrtc;
-	connectOnLoad: false;
+	onConnect: onConnect;
 	audio : true;
 	serverURL: http://localhost:8080/;" inspector="url: https://aframe.io/releases/0.3.0/aframe-inspector.min.js">
 		<!-- asset definitons -->
@@ -136,12 +142,9 @@
 	</a-scene>
 
 	<input id="fileinput" type="file" />
-	<a id="gotoupload" href="/upload.html" target="blank" />
+	<a id="gotoupload" href="/upload.html" target="blank" ></a>
 	<script>
-		function onConnect() {
-
-			ServerManager.findServer();
-		}
+		
 	</script>
 
 </body>
