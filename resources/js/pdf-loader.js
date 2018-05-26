@@ -99,9 +99,9 @@ var pdfLoader = {
 
         if (document.getElementById('melden_button') != null)
             document.getElementById('melden_button').addEventListener('click', function (evt) {
-                document.querySelector("#players-q").setAttribute("position", "0 0.2 0");
+                document.querySelector("#q").setAttribute("position", "0 0.2 0");
                 window.setTimeout(function () {
-                    document.querySelector("#players-q").setAttribute("position", "2000 0.2 0");
+                    document.querySelector("#q").setAttribute("position", "2000 0.2 0");
                 }, 5000);
             });
     },
@@ -110,7 +110,7 @@ var pdfLoader = {
 
 
 
-        if (ServerManager.is_server)
+        if (is_server)
             NAF.connection.broadcastData("load_pdf", { url: url });
 
         // Asynchronous download PDF
