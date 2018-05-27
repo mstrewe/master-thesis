@@ -28,7 +28,7 @@
 				function () {
 					var rot = $('a-camera').attr('rotation');
 					$('#players-head').attr('rotation', rot.x + " " + rot.y + " " + rot.z);
-					$('#players-head').attr('position', '0 0 0');
+					$('a-camera').attr('position', '0 0 0');
 				}, 100);
 		}
 		document.body.addEventListener('connected', function (evt) {
@@ -99,8 +99,7 @@
 			<a-entity position="0 -1.6 0">
 				<a-camera></a-camera>
 			</a-entity>
-			<a-entity id="players-head" networked="template:#avatar-head-template;showLocalTemplate:false" position="0 0 0" look-controls
-			 camera>
+			<a-entity id="players-head" networked="template:#avatar-head-template;showLocalTemplate:false" position="0 0 0">
 				<a-entity id="uploadhint" geom1etry="primitive: plane; width:3;height: 1;" position="2000 0 0" material="src:#uploadhint_asset;">
 				</a-entity>
 				<a-entity id="cursor_ring" cursor="fuse: true; fuseTimeout: 500" position="0 0 -0.5" geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
