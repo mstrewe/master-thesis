@@ -5,7 +5,7 @@
 	<script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v4.1.2/dist/aframe-extras.min.js"></script>
 	<script src="https://unpkg.com/aframe-html-shader@0.2.0/dist/aframe-html-shader.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
-	<script src="https://unpkg.com/networked-aframe@0.6.1/dist/networked-aframe.min.js"></script>
+	<script src="https://unpkg.com/networked-aframe@0.4.0/dist/networked-aframe.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	<script src="easyrtc/easyrtc.js"></script>
 	<script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
@@ -18,7 +18,41 @@
 </head>
 
 <body onload="">
+	<script>
 
+		function onConnect() {
+			pdfLoader.init();
+			initServerManager();
+			findServer();
+
+		}
+		NAF.options.useLerp = false;
+
+		NAF.schemas.add({
+			template: '#avatar-template',
+			components: [
+				'position',
+				'rotation',
+				{
+					selector: '#android',
+					component: 'collada-model'
+				},
+				{
+					selector: '#android-head',
+					component: 'collada-model'
+				},
+				{
+					selector: '#android-head',
+					component: 'scale'
+				},
+				{
+					selector: '#android',
+					component: 'scale'
+				}
+			]
+		});
+
+	</script>
 	<a-scene networked-scene="
 	room: default;
 	debug: true;
@@ -28,28 +62,18 @@
 	serverURL: http://localhost:8080/;" inspector="url: https://aframe.io/releases/0.3.0/aframe-inspector.min.js">
 		<!-- asset definitons -->
 		<a-assets>
-			<template id="avatar-template">
-				<a-entity id="player" collada-model=" url(resources/models/android/Android.dae);" networked-audio-source scale="0.3 0.3 0.3"
-				 rotation="0 230 0" position="0 0.4 0" wasd-controls>
-				</a-entity>
-			</template>
-			<template id="avatar-head-template">
-				<a-entity id="players-head" collada-model="url(resources/models/android/Android_head.dae);" scale="0.3 0.3 0.3" rotation="0 230 0"
-				 camera look-controls>
-					<a-entity id="uploadhint" geometry="primitive: plane; width:3;height: 1;" position="2000 0 0" material="src:#uploadhint_asset;">
+			<script id="avatar-template" type="text/html">
+					<a-entity id="android" collada-model=" url(resources/models/android/Android.dae);" networked-audio-source scale="0.3 0.3 0.3" rotation="0 230 0" >
 					</a-entity>
-					<a-entity id="cursor_ring" cursor="fuse: true; fuseTimeout: 500" position="0 0 -0.5" geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
-					 material="color: black; shader: flat">
-						<a-animation begin="click" easing="ease-in" attribute="scale" dur="150" fill="forwards" from="0.1 0.1 0.1" to="1 1 1"></a-animation>
-						<a-animation begin="cursor-fusing" easing="ease-in" attribute="scale" dur="1500" fill="backwards" from="1 1 1" to="0.1 0.1 0.1"></a-animation>
+				</script>
+			<script id="avatar-head-template" type="text/html">
+					<a-entity id="android-head" collada-model="url(resources/models/android/Android_head.dae);" scale="0.3 0.3 0.3" rotation="0 230 0">
 					</a-entity>
-				</a-entity>
-			</template>
-			<template id="q-template">
-				<a-entity id="q" gltf-model="url(resources/models/q.glb);" scale="0.2 0.2 0.2" rotation="0 -90 0">
-				</a-entity>
-			</template>
-
+				</script>
+			<script id="q-template" type="text/html">
+					<a-entity id="q" gltf-model="url(resources/models/q.glb);" scale="0.2 0.2 0.2" rotation="0 -90 0">
+					</a-entity>
+				</script>
 			<img id="sky" src="/resources/models/island/360_sky.jpg" />
 			<video src="resources/videos/1.mp4" id="video_asset" visible="false" />
 			<img id="play_asset" src="resources/images/play.jpg" />
@@ -62,26 +86,16 @@
 		</a-assets>
 		<a-sky id="sky_entity" src="#sky" scale="0.5 0.5 0.5"></a-sky>
 
-		<a-entity networked="template:#avatar-template;attachTemplateToLocal: false;">
-			<a-entity id="player" networked-audio-source 
-			 rotation="0 230 0" position="0 0.4 0" wasd-controls>
-				<a-entity networked="template:#avatar-head-template; attachTemplateToLocal: false;	">
-					<a-entity id="players-head" camera look-controls>
-						<a-entity id="uploadhint" geometry="primitive: plane; width:3;height: 1;" position="2000 0 0" material="src:#uploadhint_asset;">
-						</a-entity>
-						<a-entity id="cursor_ring" cursor="fuse: true; fuseTimeout: 500" position="0 0 -0.5" geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
-						 material="color: black; shader: flat">
-							<a-animation begin="click" easing="ease-in" attribute="scale" dur="150" fill="forwards" from="0.1 0.1 0.1" to="1 1 1"></a-animation>
-							<a-animation begin="cursor-fusing" easing="ease-in" attribute="scale" dur="1500" fill="backwards" from="1 1 1" to="0.1 0.1 0.1"></a-animation>
-						</a-entity>
-						<a-entity id="q" gltf-model="url(resources/models/q.glb);" scale="0.2 0.2 0.2" rotation="0 -90 0">
-						</a-entity>
-
-					</a-entity>
-					</template>
-
+		<a-entity id="player" networked="template:#avatar-template;showLocalTemplate:false;" position="0 0.4 0" wasd-controls>
+				<a-entity id="players-q" networked="template:#q-template;showLocalTemplate:false" rotation="0 90 0" position="2000 0.2 0"></a-entity>
+		<a-entity id="players-head" camera look-controls networked="template:#avatar-head-template;showLocalTemplate:false" position="0 0 0">
+				<a-entity id="uploadhint" geometry="primitive: plane; width:3;height: 1;" position="2000 0 0" material="src:#uploadhint_asset;">
 				</a-entity>
-
+				<a-entity id="cursor_ring" cursor="fuse: true; fuseTimeout: 500" position="0 0 -0.5" geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
+				 material="color: black; shader: flat">
+					<a-animation begin="click" easing="ease-in" attribute="scale" dur="150" fill="forwards" from="0.1 0.1 0.1" to="1 1 1"></a-animation>
+					<a-animation begin="cursor-fusing" easing="ease-in" attribute="scale" dur="1500" fill="backwards" from="1 1 1" to="0.1 0.1 0.1"></a-animation>
+				</a-entity>
 			</a-entity>
 		</a-entity>
 		<!--<a-entity obj-model="obj: url(resources/models/island/island.obj);mtl: url(resources/models/island/island.mtl;" position="0 0 0"></a-entity> -->
@@ -130,41 +144,7 @@
 
 	<input id="fileinput" type="file" />
 	<a id="gotoupload" href="/upload.html" target="blank"></a>
-	<script>
 
-      	function onConnect() {
-			pdfLoader.init();
-			initServerManager();
-			findServer();
-
-		}
-		NAF.options.useLerp = false;
-
-		NAF.schemas.add({
-			template: '#avatar-template',
-			components: [
-				'position',
-				'rotation',
-				'scale',
-				{
-					selector: '#android',
-					component: 'collada-model'
-				},
-				{
-					selector: '#android-head',
-					component: 'collada-model'
-				},
-				{
-					selector: '#android-head',
-					component: 'scale'
-				},
-				{
-					selector: '#android',
-					component: 'scale'
-				}
-			]
-		});
-	</script>
 
 </body>
 
