@@ -1,11 +1,11 @@
 <html>
 
 <head>
-	<script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
+	<script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
 	<script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v4.0.0/dist/aframe-extras.min.js"></script>
 	<script src="https://unpkg.com/aframe-html-shader@0.2.0/dist/aframe-html-shader.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
-	<script src="https://unpkg.com/networked-aframe@0.4.0/dist/networked-aframe.min.js"></script>
+	<script src="https://unpkg.com/networked-aframe@0.4.0/dist/networked-aframe.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	<script src="easyrtc/easyrtc.js"></script>
 	<script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
@@ -17,13 +17,24 @@
 </head>
 
 <body onload="">
-	<script> 
-
+	<script>
 		function onConnect() {
 			pdfLoader.init();
-			ServerManager.init();
-			ServerManager.findServer();
+			initServerManager();
+			
+
+			window.setInterval(
+				function()
+				{
+					var rot = $('a-camera').attr('rotation');
+					$('#players-head').attr('rotation',rot.x + " " + rot.y + " " + rot.z);
+					$('#players-head').attr('position','0 0 0');
+				},15);
 		}
+
+document.body.addEventListener('connected', function (evt) {
+	findServer();
+});
 
 		NAF.options.useLerp = false;
 		NAF.schemas.add({
@@ -31,7 +42,6 @@
 			components: [
 				'position',
 				'rotation',
-				'scale',
 				{
 					selector: '#android',
 					component: 'collada-model'
@@ -50,8 +60,6 @@
 				}
 			]
 		});
-
-
 	</script>
 	<a-scene networked-scene="
 	room: default;
@@ -59,21 +67,21 @@
 	adapter: easyrtc;
 	onConnect: onConnect;
 	audio : true;
-	serverURL: http://localhost:8080/;" inspector="url: https://aframe.io/releases/0.3.0/aframe-inspector.min.js">
+	serverURL:  http://localhost:8080/;" inspector="url: https://aframe.io/releases/0.3.0/aframe-inspector.min.js">
 		<!-- asset definitons -->
 		<a-assets>
 			<script id="avatar-template" type="text/html">
-				<a-entity id="android" collada-model=" url(resources/models/android/Android.dae);" networked-audio-source scale="0.3 0.3 0.3" rotation="0 230 0" >
-				</a-entity>
-			</script>
+					<a-entity id="android" collada-model=" url(resources/models/android/Android.dae);" networked-audio-source scale="0.3 0.3 0.3" rotation="0 230 0" >
+					</a-entity>
+				</script>
 			<script id="avatar-head-template" type="text/html">
-				<a-entity id="android-head" collada-model="url(resources/models/android/Android_head.dae);" scale="0.3 0.3 0.3" rotation="0 230 0">
-				</a-entity>
-			</script>
+					<a-entity id="android-head" collada-model="url(resources/models/android/Android_head.dae);" scale="0.3 0.3 0.3" rotation="0 230 0" >
+					</a-entity>
+				</script>
 			<script id="q-template" type="text/html">
-				<a-entity id="q" gltf-model="url(resources/models/q.glb);" scale="0.2 0.2 0.2" rotation="0 -90 0">
-				</a-entity>
-			</script>
+					<a-entity id="q" gltf-model="url(resources/models/q.glb);" scale="0.2 0.2 0.2" rotation="0 -90 0">
+					</a-entity>
+				</script>
 			<img id="sky" src="/resources/models/island/360_sky.jpg" />
 			<video src="resources/videos/1.mp4" id="video_asset" visible="false" />
 			<img id="play_asset" src="resources/images/play.jpg" />
@@ -85,14 +93,17 @@
 			<img id="uploadhint_asset" src="resources/images/uploadhint.jpg" />
 			<img id="melden_asset" src="resources/images/melden.jpg" />
 		</a-assets>
-		<a-sky id="sky_entity" src="#sky"></a-sky>
+		<a-sky id="sky_entity" src="#sky" scale="0.5 0.5 0.5"></a-sky>
 
 		<a-entity id="player" networked="template:#avatar-template;showLocalTemplate:false;" rotation="0 90 0" position="0 0.4 0"
 		 wasd-controls>
 			<a-entity id="melden_button" geometry="primitive: plane; width: 1; height: 1;" position="-0.06 -0.02 -0.73" scale="0.1 0.1 0.1"
 			 material="src:#melden_asset;" rotation="0 0 0"></a-entity>
 			<a-entity id="players-q" networked="template:#q-template;showLocalTemplate:false" rotation="0 90 0" position="2000 0.2 0"></a-entity>
-			<a-entity id="players-head" camera look-controls networked="template:#avatar-head-template;showLocalTemplate:false" position="0 0 0">
+			<a-entity position="0 -1.6 0">
+				<a-camera></a-camera>
+			</a-entity>
+			<a-entity id="players-head"  networked="template:#avatar-head-template;showLocalTemplate:false" position="0 0 0" >
 				<a-entity id="uploadhint" geometry="primitive: plane; width:3;height: 1;" position="2000 0 0" material="src:#uploadhint_asset;">
 				</a-entity>
 				<a-entity id="cursor_ring" cursor="fuse: true; fuseTimeout: 500" position="0 0 -0.5" geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
@@ -110,7 +121,7 @@
 		 scale="0.1 0.1 0.1" material="src:#pause_asset;" rotation="-30 90 0"></a-entity>
 		<a-entity event-sync id="stop_button" geometry="primitive: plane; width: 1; height: 1;" visible="false" position="2000 -0.3 -0.69"
 		 scale="0.1 0.1 0.1" material="src:#stop_asset;" rotation="-30 90 0"></a-entity>
-		<a-entity id="island" collada-model=" url(resources/models/island/island.dae);" scale="1 0.15 1" position="0 -1 0"></a-entity>
+		<a-entity id="island" collada-model=" url(resources/models/island/island.dae);" rotation="180 0 0" scale="1 0.15 1" position="0 -1 0"></a-entity>
 
 		<a-entity static-sync material="shader: html; target: #htmlElement;fps:2;" position="-8.1 2.88 -6.7" rotation="0 45.836623610465864 0"
 		 scale="1 1 1" visible="true" id="WhiteBoard" mixin="null" geometry="height:4.56;width:8.74;primitive:plane"></a-entity>
@@ -134,7 +145,12 @@
 		<a-videosphere visible="false" src="#video_asset">
 		</a-videosphere>
 	</a-scene>
+	<script> 
 
+
+
+
+	</script>
 
 </body>
 

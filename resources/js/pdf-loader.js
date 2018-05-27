@@ -110,7 +110,7 @@ var pdfLoader = {
 
 
 
-        if (ServerManager.is_server)
+        if (is_server)
             NAF.connection.broadcastData("load_pdf", { url: url });
 
         // Asynchronous download PDF

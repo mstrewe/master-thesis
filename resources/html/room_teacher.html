@@ -1,11 +1,11 @@
 <html>
 
 <head>
-	<script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
-	<script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v4.0.0/dist/aframe-extras.min.js"></script>
+	<script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
+	<script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v4.1.2/dist/aframe-extras.min.js"></script>
 	<script src="https://unpkg.com/aframe-html-shader@0.2.0/dist/aframe-html-shader.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
-	<script src="https://unpkg.com/networked-aframe@0.4.0/dist/networked-aframe.min.js"></script>
+	<script src="https://unpkg.com/networked-aframe@0.4.0/dist/networked-aframe.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	<script src="easyrtc/easyrtc.js"></script>
 	<script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
@@ -19,12 +19,21 @@
 
 <body onload="">
 	<script>
+
 		function onConnect() {
 			pdfLoader.init();
-			ServerManager.init();
-			ServerManager.findServer();
+			initServerManager();
 
+			window.setInterval(
+				function () {
+					var rot = $('a-camera').attr('rotation');
+					$('#players-head').attr('rotation', rot.x + " " + rot.y + " " + rot.z);
+					$('#players-head').attr('position', '0 0 0');
+				}, 100);
 		}
+		document.body.addEventListener('connected', function (evt) {
+			findServer();
+		});
 		NAF.options.useLerp = false;
 
 		NAF.schemas.add({
@@ -32,7 +41,6 @@
 			components: [
 				'position',
 				'rotation',
-				'scale',
 				{
 					selector: '#android',
 					component: 'collada-model'
@@ -51,6 +59,7 @@
 				}
 			]
 		});
+
 	</script>
 	<a-scene networked-scene="
 	room: default;
@@ -73,7 +82,6 @@
 					<a-entity id="q" gltf-model="url(resources/models/q.glb);" scale="0.2 0.2 0.2" rotation="0 -90 0">
 					</a-entity>
 				</script>
-
 			<img id="sky" src="/resources/models/island/360_sky.jpg" />
 			<video src="resources/videos/1.mp4" id="video_asset" visible="false" />
 			<img id="play_asset" src="resources/images/play.jpg" />
@@ -84,11 +92,15 @@
 			<img id="upload_asset" src="resources/images/upload.png" />
 			<img id="uploadhint_asset" src="resources/images/uploadhint.jpg" />
 		</a-assets>
-		<a-sky id="sky_entity" src="#sky"></a-sky>
+		<a-sky id="sky_entity" src="#sky" scale="0.5 0.5 0.5"></a-sky>
 
 		<a-entity id="player" networked="template:#avatar-template;showLocalTemplate:false;" position="0 0.4 0" wasd-controls>
-			<a-entity id="players-head" camera look-controls networked="template:#avatar-head-template;showLocalTemplate:false" position="0 0 0">
-				<a-entity id="uploadhint" geometry="primitive: plane; width:3;height: 1;" position="2000 0 0" material="src:#uploadhint_asset;">
+			<a-entity id="players-q" networked="template:#q-template;showLocalTemplate:false" rotation="0 90 0" position="2000 0.2 0"></a-entity>
+			<a-entity position="0 -1.6 0">
+				<a-camera></a-camera>
+			</a-entity>
+			<a-entity id="players-head" networked="template:#avatar-head-template;showLocalTemplate:false" position="0 0 0">
+				<a-entity id="uploadhint" geom1etry="primitive: plane; width:3;height: 1;" position="2000 0 0" material="src:#uploadhint_asset;">
 				</a-entity>
 				<a-entity id="cursor_ring" cursor="fuse: true; fuseTimeout: 500" position="0 0 -0.5" geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
 				 material="color: black; shader: flat">
@@ -108,7 +120,7 @@
 		 material="src:#upload_asset;" rotation="-30 -130 0"></a-entity>
 
 
-		<a-entity id="island" collada-model=" url(resources/models/island/island.dae);" scale="1 0.15 1" position="0 -1 0"></a-entity>
+		<a-entity id="island" collada-model=" url(resources/models/island/island.dae);" rotation="180 0 0" scale="1 0.15 1" position="0 -1 0"></a-entity>
 
 		<a-entity static-sync material="shader: html; target: #htmlElement;fps:2;" position="-8.1 2.88 -6.7" rotation="0 45.836623610465864 0"
 		 scale="1 1 1" visible="true" id="WhiteBoard" mixin="null" geometry="height:4.56;width:8.74;primitive:plane"></a-entity>
@@ -142,10 +154,8 @@
 	</a-scene>
 
 	<input id="fileinput" type="file" />
-	<a id="gotoupload" href="/upload.html" target="blank" ></a>
-	<script>
-		
-	</script>
+	<a id="gotoupload" href="/upload.html" target="blank"></a>
+
 
 </body>
 
