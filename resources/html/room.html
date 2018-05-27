@@ -21,7 +21,7 @@
 		function onConnect() {
 			pdfLoader.init();
 			initServerManager();
-			findServer();
+			
 
 			window.setInterval(
 				function()
@@ -31,6 +31,10 @@
 					$('#players-head').attr('position','0 0 0');
 				},100);
 		}
+
+document.body.addEventListener('connected', function (evt) {
+	findServer();
+});
 
 		NAF.options.useLerp = false;
 		NAF.schemas.add({
@@ -63,7 +67,7 @@
 	adapter: easyrtc;
 	onConnect: onConnect;
 	audio : true;
-	serverURL: https://vr.maikpiel.de/;" inspector="url: https://aframe.io/releases/0.3.0/aframe-inspector.min.js">
+	serverURL:  http://localhost:8080/;" inspector="url: https://aframe.io/releases/0.3.0/aframe-inspector.min.js">
 		<!-- asset definitons -->
 		<a-assets>
 			<script id="avatar-template" type="text/html">
