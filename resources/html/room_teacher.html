@@ -30,6 +30,7 @@
 					var rot = $('#players-head').attr('rotation');
 					$('#players-head').attr('rotation', rot.x + " " + rot.y + " " + rot.z);
 					$('#players-head').attr('position', '0 0 0');
+			
 				}, 100);
 		}
 		NAF.options.useLerp = false;
@@ -65,7 +66,7 @@
 	adapter: easyrtc;
 	onConnect: onConnect;
 	audio : true;
-	serverURL: http://localhost:8080/;" inspector="url: https://aframe.io/releases/0.3.0/aframe-inspector.min.js">
+	serverURL: https://vr.maikpiel.de/;" inspector="url: https://aframe.io/releases/0.3.0/aframe-inspector.min.js">
 		<!-- asset definitons -->
 		<a-assets>
 			<script id="avatar-template" type="text/html">
@@ -94,7 +95,8 @@
 
 		<a-entity id="player" networked="template:#avatar-template;showLocalTemplate:false;" position="0 0.4 0" wasd-controls>
 			<a-entity id="players-q" networked="template:#q-template;showLocalTemplate:false" rotation="0 90 0" position="2000 0.2 0"></a-entity>
-			<a-entity id="players-head" networked="template:#avatar-head-template;showLocalTemplate:false" position="0 0 0" camera look-controls>
+			<a-entity id="players-head" networked="template:#avatar-head-template;showLocalTemplate:false" position="0 0 0" look-controls>
+				<a-camera position="0 0 0" look-controls-enabled="false"></a-camera>
 				<a-entity id="uploadhint" geometry="primitive: plane; width:3;height: 1;" position="2000 0 0" material="src:#uploadhint_asset;">
 				</a-entity>
 				<a-entity id="cursor_ring" cursor="fuse: true; fuseTimeout: 500" position="0 0 -0.5" geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
