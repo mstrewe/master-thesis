@@ -23,7 +23,13 @@
 			initServerManager();
 			findServer();
 
-			window.setInterval(function(){var rot = $('#players-head').attr('rotation');$('#players-head').attr('rotation',rot.x + " " + rot.y + " " + rot.z);},100)
+			window.setInterval(
+				function()
+				{
+					var rot = $('#players-head').attr('rotation');
+					$('#players-head').attr('rotation',rot.x + " " + rot.y + " " + rot.z);
+					$('#players-head').attr('position','0 0 0');
+				},100);
 		}
 
 		NAF.options.useLerp = false;
