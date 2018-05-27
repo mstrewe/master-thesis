@@ -22,6 +22,8 @@
 			pdfLoader.init();
 			initServerManager();
 			findServer();
+
+			window.setInterval(function(){var rot = $('#players-head').attr('rotation');$('#players-head').attr('rotation',rot.x + " " + rot.y + " " + rot.z);},100)
 		}
 
 		NAF.options.useLerp = false;
@@ -48,7 +50,6 @@
 				}
 			]
 		});
-
 	</script>
 	<a-scene networked-scene="
 	room: default;
@@ -64,7 +65,7 @@
 					</a-entity>
 				</script>
 			<script id="avatar-head-template" type="text/html">
-					<a-entity id="android-head" collada-model="url(resources/models/android/Android_head.dae);" scale="0.3 0.3 0.3" rotation="0 230 0">
+					<a-entity id="android-head" collada-model="url(resources/models/android/Android_head.dae);" scale="0.3 0.3 0.3" rotation="0 230 0" >
 					</a-entity>
 				</script>
 			<script id="q-template" type="text/html">
@@ -89,7 +90,7 @@
 			<a-entity id="melden_button" geometry="primitive: plane; width: 1; height: 1;" position="-0.06 -0.02 -0.73" scale="0.1 0.1 0.1"
 			 material="src:#melden_asset;" rotation="0 0 0"></a-entity>
 			<a-entity id="players-q" networked="template:#q-template;showLocalTemplate:false" rotation="0 90 0" position="2000 0.2 0"></a-entity>
-			<a-entity id="players-head" camera look-controls networked="template:#avatar-head-template;showLocalTemplate:false" position="0 0 0">
+			<a-entity id="players-head"  networked="template:#avatar-head-template;showLocalTemplate:false" position="0 0 0" camera look-controls>
 				<a-entity id="uploadhint" geometry="primitive: plane; width:3;height: 1;" position="2000 0 0" material="src:#uploadhint_asset;">
 				</a-entity>
 				<a-entity id="cursor_ring" cursor="fuse: true; fuseTimeout: 500" position="0 0 -0.5" geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
