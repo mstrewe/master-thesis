@@ -28,7 +28,7 @@
 				function () {
 					var rot = $('a-camera').attr('rotation');
 					$('#players-head').attr('rotation', rot.x + " " + rot.y + " " + rot.z);
-					$('a-camera').attr('position', '0 0 0');
+					$('#players-head').attr('position', '0 0 0');
 				}, 100);
 		}
 		document.body.addEventListener('connected', function (evt) {
