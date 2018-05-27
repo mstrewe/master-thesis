@@ -141,7 +141,7 @@ function onGetPosition(senderid, dataType, data, targetID) {
         if (typeof (is_server) == "undefined" || is_server === false)
             return;
         var pos = findNextPosition(senderid);
-        NAF.connection.sendData(senderid, "sc_gp_r", pos);
+        window.setTimeout(function () { NAF.connection.sendData(senderid, "sc_gp_r", pos); }, 1000);
         //colorize the model
     }
 }

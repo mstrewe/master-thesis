@@ -26,10 +26,10 @@
 			window.setInterval(
 				function()
 				{
-					var rot = $('#players-head').attr('rotation');
+					var rot = $('a-camera').attr('rotation');
 					$('#players-head').attr('rotation',rot.x + " " + rot.y + " " + rot.z);
 					$('#players-head').attr('position','0 0 0');
-				},100);
+				},15);
 		}
 
 document.body.addEventListener('connected', function (evt) {
@@ -100,8 +100,10 @@ document.body.addEventListener('connected', function (evt) {
 			<a-entity id="melden_button" geometry="primitive: plane; width: 1; height: 1;" position="-0.06 -0.02 -0.73" scale="0.1 0.1 0.1"
 			 material="src:#melden_asset;" rotation="0 0 0"></a-entity>
 			<a-entity id="players-q" networked="template:#q-template;showLocalTemplate:false" rotation="0 90 0" position="2000 0.2 0"></a-entity>
-			<a-entity id="players-head"  networked="template:#avatar-head-template;showLocalTemplate:false" position="0 0 0" look-controls>
-				<a-camera position="0 0 0" look-controls-enabled="false"></a-camera>
+			<a-entity position="0 -1.6 0">
+				<a-camera></a-camera>
+			</a-entity>
+			<a-entity id="players-head"  networked="template:#avatar-head-template;showLocalTemplate:false" position="0 0 0" >
 				<a-entity id="uploadhint" geometry="primitive: plane; width:3;height: 1;" position="2000 0 0" material="src:#uploadhint_asset;">
 				</a-entity>
 				<a-entity id="cursor_ring" cursor="fuse: true; fuseTimeout: 500" position="0 0 -0.5" geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
