@@ -6,53 +6,53 @@ clientCount = 0;
 function initServerManager() {
     room_positions = [
         {
-            position: '-6 0 3',
-            rotation: '0 0 0',
+            position: '-5.5 0 2.2',
+            rotation: '0 50 0',
             color: "green"
         },
         {
-            position: '-5.5 0 2.5',
-            rotation: '0 0 0',
+            position: '-4.27 0 0.97',
+            rotation: '0 50 0',
             color: 'blue'
         },
         {
-            position: '-5 0 2',
-            rotation: '0 0 0',
+            position: '-3.24 0 -0.29',
+            rotation: '0 50 0',
             color: 'lightblue'
         },
         {
-            position: '-4.5 0 1.5',
-            rotation: '0 0 0',
+            position: '-2.23 0 -1.53',
+            rotation: '0 50 0',
             color: 'pink'
         },
         {
-            position: '-4 0 1',
-            rotation: '0 0 0',
+            position: '-0.98 0 -2.73',
+            rotation: '0 50 0',
             color: 'red'
         },
         {
-            position: '-3.5 0 0.5',
-            rotation: '0 0 0',
+            position: '0.04 0 -4.14',
+            rotation: '0 50 0',
             color: 'yellow'
         },
         {
-            position: '-3 0 0',
-            rotation: '0 0 0',
-            color: 'brown'
+            position: '-0.78 0 -6.8',
+            rotation: '0 50 0',
+            color: 'gold'
         },
         {
-            position: '-2.5 0 -0.5',
-            rotation: '0 0 0',
+            position: '0 0 -8.6',
+            rotation: '0 50 0',
             color: 'gray'
         },
         {
-            position: '-2 0 -1',
-            rotation: '0 0 0',
+            position: '0.6 0 -10.4',
+            rotation: '0 50 0',
             color: 'rosa'
         },
         {
-            position: '-1.5 0 -1.5',
-            rotation: '0 0 0',
+            position: '1.4 0 -12.2',
+            rotation: '0 50 0',
             color: 'white'
         }];
 

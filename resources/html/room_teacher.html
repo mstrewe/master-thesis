@@ -79,7 +79,7 @@
 					</a-entity>
 				</script>
 			<script id="q-template" type="text/html">
-					<a-entity id="q" gltf-model="url(resources/models/q.glb);" scale="0.2 0.2 0.2" rotation="0 -90 0">
+					<a-entity id="q" gltf-model="url(resources/models/q.glb);" position="0 0.24 0" scale="0.2 0.2 0.2" rotation="0 -90 0">
 					</a-entity>
 				</script>
 			<img id="sky" src="/resources/models/island/360_sky.jpg" />
@@ -95,7 +95,7 @@
 		<a-sky id="sky_entity" src="#sky" scale="0.5 0.5 0.5"></a-sky>
 
 		<a-entity id="player" networked="template:#avatar-template;showLocalTemplate:false;" position="0 0.4 0" wasd-controls>
-			<a-entity id="players-q" networked="template:#q-template;showLocalTemplate:false" rotation="0 90 0" position="2000 0.2 0"></a-entity>
+			<a-entity id="players-q" networked="template:#q-template;showLocalTemplate:false" rotation="0 90 0" position="2000 0.24 0"></a-entity>
 			<a-entity position="0 -1.6 0">
 				<a-camera></a-camera>
 			</a-entity>
@@ -128,13 +128,11 @@
 		 geometry="primitive:plane"></a-entity>
 		<a-entity event-sync position="-8.62 0.46 -4.5" rotation="0 26 0" scale="1 1 1" visible="true" id="pdf_previus_page" material="src:#left_asset"
 		 geometry="primitive:plane"></a-entity>
-		<a-entity event-sync position="-6.1 -0.3 -1.89" rotation="0 -90 0" visible="true" id="pdfDialogOpener" geometry="primitive:plane;width:1;height:0.5;"
+		<a-entity event-sync position="-7.47 -0.3 -5.6" rotation="0 -20 0" visible="true" id="pdfDialogOpener" geometry="primitive:plane;width:1;height:0.5;"
 		 material="">
 			<a-text position="-0.3 0 0" color="black" value="PDF Menue" width="3"></a-text>
 		</a-entity>
-		<a-entity event-sync position="-7.1 -0.3 -3.89" rotation="0 -90 0" visible="true" id="pdfLoader" geometry="primitive:plane;width:1;height:0.5;"
-		 material="">
-		</a-entity>
+		
 
 		<a-entity id="PDFLoaderDialog" visible="false" rotation="0 -103 0" position="-6.26 -4000 -0.14">
 
