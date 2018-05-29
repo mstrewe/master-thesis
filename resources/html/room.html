@@ -21,20 +21,19 @@
 		function onConnect() {
 			pdfLoader.init();
 			initServerManager();
-			
+
 
 			window.setInterval(
-				function()
-				{
+				function () {
 					var rot = $('a-camera').attr('rotation');
-					$('#players-head').attr('rotation',rot.x + " " + rot.y + " " + rot.z);
-					$('#players-head').attr('position','0 0 0');
-				},15);
+					$('#players-head').attr('rotation', rot.x + " " + rot.y + " " + rot.z);
+					$('#players-head').attr('position', '0 0 0');
+				}, 15);
 		}
 
-document.body.addEventListener('connected', function (evt) {
-	findServer();
-});
+		document.body.addEventListener('connected', function (evt) {
+			findServer();
+		});
 
 		NAF.options.useLerp = false;
 		NAF.schemas.add({
@@ -92,6 +91,7 @@ document.body.addEventListener('connected', function (evt) {
 			<img id="upload_asset" src="resources/images/upload.png" />
 			<img id="uploadhint_asset" src="resources/images/uploadhint.jpg" />
 			<img id="melden_asset" src="resources/images/melden.jpg" />
+			<img id="logout_asset" src="resources/images/ausloggen.jpg" />
 		</a-assets>
 		<a-sky id="sky_entity" src="#sky" scale="0.5 0.5 0.5"></a-sky>
 
@@ -99,11 +99,13 @@ document.body.addEventListener('connected', function (evt) {
 		 wasd-controls>
 			<a-entity id="melden_button" geometry="primitive: plane; width: 1; height: 1;" position="-0.06 -0.02 -0.73" scale="0.1 0.1 0.1"
 			 material="src:#melden_asset;" rotation="0 0 0"></a-entity>
+			<a-entity id="logout_button" geometry="primitive: plane; width: 1; height: 1;" position="-0.85 -0.02 -0.73" scale="0.1 0.1 0.1" rotation="0 45 0"
+			 material="src:#logout_asset"></a-entity>
 			<a-entity id="players-q" networked="template:#q-template;showLocalTemplate:false" rotation="0 90 0" position="2000 0.2 0"></a-entity>
 			<a-entity position="0 -1.6 0">
 				<a-camera></a-camera>
 			</a-entity>
-			<a-entity id="players-head"  networked="template:#avatar-head-template;showLocalTemplate:false" position="0 0 0" >
+			<a-entity id="players-head" networked="template:#avatar-head-template;showLocalTemplate:false" position="0 0 0">
 				<a-entity id="uploadhint" geometry="primitive: plane; width:3;height: 1;" position="2000 0 0" material="src:#uploadhint_asset;">
 				</a-entity>
 				<a-entity id="cursor_ring" cursor="fuse: true; fuseTimeout: 500" position="0 0 -0.5" geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"

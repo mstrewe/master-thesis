@@ -97,6 +97,10 @@ var pdfLoader = {
             window.setTimeout(function () { window.location.href = "/prepare_lesson.html"; }, 4000);
         });
 
+        $("#logout_button").click(function (e) {
+            window.location.href = "/loggedout.html";
+        });
+
         if (document.getElementById('melden_button') != null)
             document.getElementById('melden_button').addEventListener('click', function (evt) {
                 document.querySelector("#players-q").setAttribute("position", "0 0.2 0");
