@@ -68,7 +68,7 @@ function initServerManager() {
 function findNewServer() {
     NAF.connection.broadcastData("sc_fs", {});
 }
-
+findServerIntervalNumber = 0;
 function findServer() {
     clientCount = 0;
     if (NAF.connection.isConnected() == false) {
@@ -79,12 +79,14 @@ function findServer() {
     }
     window.setTimeout(() => {
         broadcastFindServer();
+        findServerIntervalNumber = window.setInterval(broadcastFindServer, 5000);
     }, 500);
 }
 
 function broadcastFindServer() {
     if (document.cookie.indexOf('teacher_login_cookie') > -1 && window.location.href.indexOf('room_teacher.html') > -1) {
         makeServer();
+        window.clearInterval(findServerIntervalNumber);
     } else {
         NAF.connection.broadcastData("sc_gp", {});
     }
@@ -145,9 +147,11 @@ function onGetPosition(senderid, dataType, data, targetID) {
         //colorize the model
     }
 }
-
+serverFound = false;
 function onGetPositionResponse(senderid, dataType, data, targetID) {
-    if (senderid != NAF.clientId) {
+    if (senderid != NAF.clientId && serverFound == false) {
+        window.clearInterval(findServerIntervalNumber);
+        serverFound = true;
         var el = document.getElementById("player");
         el.setAttribute("position", data.position);
         el.setAttribute("rotation", data.rotation);
