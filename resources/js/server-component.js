@@ -38,7 +38,7 @@ function initServerManager() {
         {
             position: '-0.78 0 -6.8',
             rotation: '0 50 0',
-            color: 'gold'
+            color: 'brown'
         },
         {
             position: '0 0 -8.6',
