@@ -6,47 +6,47 @@ clientCount = 0;
 function initServerManager() {
     room_positions = [
         {
-            position: '-5.5 0 2.2',
+            position: '-6.69 0 3.57',
             rotation: '0 50 0',
             color: "green"
         },
         {
-            position: '-4.27 0 0.97',
+            position: '-6.69 0 3.57',
             rotation: '0 50 0',
             color: 'blue'
         },
         {
-            position: '-3.24 0 -0.29',
+            position: '-4.69 0 2.75',
             rotation: '0 50 0',
             color: 'lightblue'
         },
         {
-            position: '-2.23 0 -1.53',
+            position: '-2.52 0 1.47',
             rotation: '0 50 0',
             color: 'pink'
         },
         {
-            position: '-0.98 0 -2.73',
+            position: '-0.89 0 -0.02',
             rotation: '0 50 0',
             color: 'red'
         },
         {
-            position: '0.04 0 -4.14',
+            position: '0.99 0 -1.69',
             rotation: '0 50 0',
             color: 'yellow'
         },
         {
-            position: '-0.78 0 -6.8',
+            position: '2.5 0 -3.84',
             rotation: '0 50 0',
             color: 'brown'
         },
         {
-            position: '0 0 -8.6',
+            position: '3.47 0 -5.97',
             rotation: '0 50 0',
             color: 'gray'
         },
         {
-            position: '0.6 0 -10.4',
+            position: '3.75 0 -8.32',
             rotation: '0 50 0',
             color: 'deeppink'
         },
@@ -112,7 +112,7 @@ function findNextPosition(initiator) {
         }
     }
     return {
-        position: '4 0 -7',
+        position: '2.15 0 -9.77',
         rotation: '0 0 0',
         color: 'rosa',
         unvisible: true
