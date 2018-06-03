@@ -63,6 +63,42 @@ function initServerManager() {
     NAF.connection.subscribeToDataChannel('load_mp4', onLoadMp4);
     //  self.findServer();
     // AFRAME.scenes[0].emit('connect');
+    document.body.addEventListener('clientConnected', function (evt) {
+        window.setTimeout(function () {
+            checkList(evt.detail.clientId);
+        }, 3000);
+    });
+    document.body.addEventListener('clientDisconnected', function (evt) {
+        window.setTimeout(function () {
+            for (let index = 0; index < room_positions.length; index++) {
+                const element = room_positions[index];
+                if (element.clientId == evt.detail.clientId)
+                    room_positions[index].clientId = undefined;
+            }
+        }, 3000);
+    });
+
+}
+
+function checkList(clientID) {
+    if (is_server == true) {
+        $('[collada-model^=" url(resources/models/android/Android"]')
+            .each(function (ind, el) {
+                var colModel = el.components["collada-model"].attrValue;
+                if (colModel.startsWith("resources")) {
+                    var color = colModel.replace("resources/models/android/Android_", "").replace(".dae", "").trim();
+                    if (color == false || color.startsWith("resources"))
+                        window.setTimeout(function () {
+                            checkList(clientID);
+                        }, 3000);
+                    for (let index = 0; index < room_positions.length; index++) {
+                        const element = room_positions[index];
+                        if (element.color == color && !(element.clientId))
+                            room_positions[index].clientId = clientID;
+                    }
+                }
+            });
+    }
 }
 
 function findNewServer() {
@@ -101,7 +137,6 @@ function makeServer() {
     window.setTimeout(function () {
         document.getElementById("player").components.position.data.x = document.getElementById("player").components.position.data.x + 0.00001;
     }, 50);
-
 }
 
 function findNextPosition(initiator) {
@@ -164,7 +199,7 @@ function onGetPositionResponse(senderid, dataType, data, targetID) {
                     if (data.color != "green")
                         localPlayer.attr("collada-model", "url(resources/models/android/Android_" + data.color + ".dae);");
                     localPlayer.attr("visible", "false");
-                }, 5000);
+                }, 500);
             window.setTimeout(
                 function () {
                     if (data.color != "green")
@@ -172,14 +207,14 @@ function onGetPositionResponse(senderid, dataType, data, targetID) {
                     localPlayerHead.attr("visible", "false");
                     localCursorRing.attr("visible", "true");
                     localCursorRing.attr("material", "color: " + data.color + "; shader: flat");
-                }, 5000);
+                }, 500);
         } else {
             window.setTimeout(
                 function () {
                     localPlayer.attr("visible", "false");
                     localPlayer.attr("scale", "0.0001 0.0001 0.0001");
                     localPlayerHead.attr("scale", "0.0001 0.0001 0.0001");
-                }, 5000);
+                }, 500);
         }
         //call network update
         window.setTimeout(function () { document.getElementById("player").components.position.data.x = document.getElementById("player").components.position.data.x + 0.00001; }, 50);
