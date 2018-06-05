@@ -91,6 +91,7 @@
 			<img id="right_asset" src="resources/images/right.jpg" />
 			<img id="upload_asset" src="resources/images/upload.png" />
 			<img id="uploadhint_asset" src="resources/images/uploadhint.jpg" />
+			<img id="video_header_asset" src="resources/images/video_header.jpg"/>
 		</a-assets>
 		<a-sky id="sky_entity" src="#sky" scale="0.5 0.5 0.5"></a-sky>
 
@@ -110,25 +111,28 @@
 			</a-entity>
 		</a-entity>
 		<!--<a-entity obj-model="obj: url(resources/models/island/island.obj);mtl: url(resources/models/island/island.mtl;" position="0 0 0"></a-entity> -->
-		<a-entity event-sync id="play_button" geometry="primitive: plane; width: 1; height: 1;" position="-7.29	 -0.3 0.55" scale="0.1 0.1 0.1"
-		 material="src:#play_asset;" rotation="-30 -130 0"></a-entity>
-		<a-entity event-sync id="pause_button" geometry="primitive: plane; width: 1; height: 1;" position="-7.38 -0.3 0.65" scale="0.1 0.1 0.1"
-		 material="src:#pause_asset;" rotation="-30 -130 0"></a-entity>
-		<a-entity event-sync id="stop_button" geometry="primitive: plane; width: 1; height: 1;" position="-7.45	-0.3 0.73" scale="0.1 0.1 0.1"
-		 material="src:#stop_asset;" rotation="-30 -130 0"></a-entity>
-		<a-entity event-sync id="upload_button" geometry="primitive: plane; width: 1; height: 1;" position="-7.51 -0.3 0.81" scale="0.1 0.1 0.1"
-		 material="src:#upload_asset;" rotation="-30 -130 0"></a-entity>
+		<a-entity  id="vidio_header" geometry="primitive: plane; width: 3; height: 1;" position="-9.13 -0.19 -1.44" scale="0.1 0.1 0.1"
+		material="src:#video_header_asset;" rotation="-30 45 0"></a-entity>
+   
+		<a-entity event-sync id="play_button" geometry="primitive: plane; width: 1; height: 1;" position="-9.21	 -0.3 -1.30" scale="0.1 0.1 0.1"
+		 material="src:#play_asset;" rotation="-30 45 0"></a-entity>
+		<a-entity event-sync id="pause_button" geometry="primitive: plane; width: 1; height: 1;" position="-9.11 -0.3 -1.40" scale="0.1 0.1 0.1"
+		 material="src:#pause_asset;" rotation="-30 45 0"></a-entity>
+		<a-entity event-sync id="stop_button" geometry="primitive: plane; width: 1; height: 1;" position="-9.01	-0.3 -1.50" scale="0.1 0.1 0.1"
+		 material="src:#stop_asset;" rotation="-30 45 0"></a-entity>
+		<a-entity event-sync id="upload_button" geometry="primitive: plane; width: 1; height: 1;" position="-8.14 -0.3 -2.40" scale="0.1 0.1 0.1"
+		 material="src:#upload_asset;" rotation="-30 10 0"></a-entity>
 
 
 		<a-entity id="island" collada-model=" url(resources/models/island/island.dae);" rotation="180 0 0" scale="1 0.15 1" position="0 -1 0"></a-entity>
 
 		<a-entity static-sync material="shader: html; target: #htmlElement;fps:2;" position="-8.1 2.88 -6.7" rotation="0 45.836623610465864 0"
 		 scale="1 1 1" visible="true" id="WhiteBoard" mixin="null" geometry="height:4.56;width:8.74;primitive:plane"></a-entity>
-		<a-entity event-sync position="-6.14 0.46 -5.57" rotation="0 10 0" scale="1 1 1" visible="true" id="pdf_next_page" material="src:#right_asset"
+		<a-entity event-sync position="-7.40 -0.15 -4.33" rotation="0 10 0" scale="0.8 0.8 0.8" visible="true" id="pdf_next_page" material="src:#right_asset"
 		 geometry="primitive:plane"></a-entity>
-		<a-entity event-sync position="-8.62 0.46 -4.5" rotation="0 26 0" scale="1 1 1" visible="true" id="pdf_previus_page" material="src:#left_asset"
+		<a-entity event-sync position="-9.52 -0.10 -3.87" rotation="0 10 0" scale="0.8 0.8 0.8" visible="true" id="pdf_previus_page" material="src:#left_asset"
 		 geometry="primitive:plane"></a-entity>
-		<a-entity event-sync position="-7.47 -0.3 -5.6" rotation="0 -20 0" visible="true" id="pdfDialogOpener" geometry="primitive:plane;width:1;height:0.5;"
+		<a-entity event-sync position="-8.49 -0.11 -4.11" rotation="0 10 0" visible="true" id="pdfDialogOpener" geometry="primitive:plane;width:1;height:0.5;"
 		 material="">
 			<a-text position="-0.3 0 0" color="black" value="PDF Menue" width="3"></a-text>
 		</a-entity>

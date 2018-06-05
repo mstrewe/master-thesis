@@ -92,6 +92,7 @@
 			<img id="uploadhint_asset" src="resources/images/uploadhint.jpg" />
 			<img id="melden_asset" src="resources/images/melden.jpg" />
 			<img id="logout_asset" src="resources/images/ausloggen.jpg" />
+			<img id="video_header_asset" src="resources/images/video_header.jpg"/>
 		</a-assets>
 		<a-sky id="sky_entity" src="#sky" scale="0.5 0.5 0.5"></a-sky>
 
@@ -117,6 +118,9 @@
 
 		</a-entity>
 		<!--<a-entity obj-model="obj: url(resources/models/island/island.obj);mtl: url(resources/models/island/island.mtl;" position="0 0 0"></a-entity> -->
+		<a-entity  id="vidio_header" geometry="primitive: plane; width: 3; height: 1;" position="2000	 -0.34 -1.42" scale="0.1 0.1 0.1"
+		material="src:#video_header_asset;" rotation="-30 10 0"></a-entity>
+   
 		<a-entity event-sync id="play_button" geometry="primitive: plane; width: 1; height: 1;" visible="false" position="2000 -0.3 -0.49"
 		 scale="0.1 0.1 0.1" material="src:#play_asset;" rotation="-30 90 0"></a-entity>
 		<a-entity event-sync id="pause_button" geometry="primitive: plane; width: 1; height: 1;" visible="false" position="2000 -0.3 -0.59"
