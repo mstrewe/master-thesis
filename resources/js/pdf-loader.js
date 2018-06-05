@@ -21,7 +21,7 @@ var pdfLoader = {
                         method: "GET",
                         success: function (response) {
                             $('#PDFLoaderDialog').attr("visible", "true");
-                            $('#PDFLoaderDialog').attr("position", "-6.26 -0.3 -0.14");
+                            $('#PDFLoaderDialog').attr("position", "-8.63 1.8 -5.86");
                             if (response)
                                 if (response.length > 0) {
                                     var iter = 1.4;
@@ -33,25 +33,26 @@ var pdfLoader = {
                                                 position = "0 ' + iter + '" 0" \
                                                 geometry = "primitive: plane; height: auto; width: auto" \
                                                 material = "color: blue" \
-                                                text = "width: 3; value: '+ element + '" > \
+                                                text = "width: 3; value:'+ element + '" \
                                                 event-sync \
-                                                </a - entity > ');
+                                                file = "/uploads/'+ element + '"> </a-entity> ');
                                             $('#PDFLoaderDialog').append(el);
                                             var fileUrl = "/uploads/" + element;
                                             if (element.endsWith('mp4')) {
                                                 el[0].addEventListener('click', function () {
-
-                                                    $('video').attr("src", fileUrl);
+                                                    var local = $(this).attr('file');
+                                                    $('video').attr("src", local);
                                                     $('#PDFLoaderDialog').attr("visible", "false");
-                                                    $('#PDFLoaderDialog').attr("position", "-6.26 -3000 -0.14");
+                                                    $('#PDFLoaderDialog').attr("position", "-8.63 -4000 -5.86");
                                                     if (ServerManager.is_server)
-                                                        NAF.connection.broadcastData("load_mp4", { url: fileUrl });
+                                                        NAF.connection.broadcastData("load_mp4", { url: local });
                                                 });
                                             } else if (element.endsWith("pdf")) {
                                                 el[0].addEventListener('click', function () {
-                                                    pdfLoader.loadUrl(fileUrl);
+                                                    var local = $(this).attr('file');
+                                                    pdfLoader.loadUrl(local);
                                                     $('#PDFLoaderDialog').attr("visible", "false");
-                                                    $('#PDFLoaderDialog').attr("position", "-6.26 -3000 -0.14");
+                                                    $('#PDFLoaderDialog').attr("position", "-8.63 -4000 -5.86");
                                                 });
                                             }
                                             iter -= 0.2;
@@ -86,7 +87,7 @@ var pdfLoader = {
             document.querySelector('#pdf_previus_page').setAttribute('visible', "true");
             document.querySelector('#sky_entity').setAttribute('visible', "true");
             document.querySelector('#vidio_header').setAttribute('visible', "true");
-        
+
             if (document.getElementById('pdfDialogOpener') != null)
                 document.getElementById('pdfDialogOpener').setAttribute('visible', "true");
 

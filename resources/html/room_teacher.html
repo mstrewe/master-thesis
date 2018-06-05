@@ -101,7 +101,7 @@
 				<a-camera></a-camera>
 			</a-entity>
 			<a-entity id="players-head" networked="template:#avatar-head-template;showLocalTemplate:false" position="0 0 0">
-				<a-entity id="uploadhint" geom1etry="primitive: plane; width:3;height: 1;" position="2000 0 0" material="src:#uploadhint_asset;">
+				<a-entity id="uploadhint" geometry="primitive: plane; width:3;height: 1;" position="2000 0 0" material="src:#uploadhint_asset;">
 				</a-entity>
 				<a-entity id="cursor_ring" cursor="fuse: true; fuseTimeout: 500" position="0 0 -0.5" geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
 				 material="color: black; shader: flat">
@@ -120,8 +120,8 @@
 		 material="src:#pause_asset;" rotation="-30 45 0"></a-entity>
 		<a-entity event-sync id="stop_button" geometry="primitive: plane; width: 1; height: 1;" position="-9.01	-0.3 -1.50" scale="0.1 0.1 0.1"
 		 material="src:#stop_asset;" rotation="-30 45 0"></a-entity>
-		<a-entity event-sync id="upload_button" geometry="primitive: plane; width: 1; height: 1;" position="-8.14 -0.3 -2.40" scale="0.1 0.1 0.1"
-		 material="src:#upload_asset;" rotation="-30 10 0"></a-entity>
+		<a-entity event-sync id="upload_button" geometry="primitive: plane; width: 1; height: 1;" position="-7.28 -0.3 -2.23" scale="0.5 0.3 0.3"
+		 material="src:#upload_asset;" rotation="0 -35 0"></a-entity>
 
 
 		<a-entity id="island" collada-model=" url(resources/models/island/island.dae);" rotation="180 0 0" scale="1 0.15 1" position="0 -1 0"></a-entity>
@@ -138,7 +138,7 @@
 		</a-entity>
 		
 
-		<a-entity id="PDFLoaderDialog" visible="false" rotation="0 -103 0" position="-6.26 -4000 -0.14">
+		<a-entity id="PDFLoaderDialog" visible="false" rotation="0 45 0" position="-8.63 -4000 -5.86">
 
 		</a-entity>
 
