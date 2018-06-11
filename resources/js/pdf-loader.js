@@ -21,7 +21,7 @@ var pdfLoader = {
                         method: "GET",
                         success: function (response) {
                             $('#PDFLoaderDialog').attr("visible", "true");
-                            $('#PDFLoaderDialog').attr("position", "-8.63 1.8 -5.86");
+                            $('#PDFLoaderDialog').attr("position", "-8.44 0.82 -3.58");
                             if (response)
                                 if (response.length > 0) {
                                     var iter = 1.4;
@@ -43,7 +43,7 @@ var pdfLoader = {
                                                     var local = $(this).attr('file');
                                                     $('video').attr("src", local);
                                                     $('#PDFLoaderDialog').attr("visible", "false");
-                                                    $('#PDFLoaderDialog').attr("position", "-8.63 -4000 -5.86");
+                                                    $('#PDFLoaderDialog').attr("position", "-8.44 4000 -3.58");
                                                     if (ServerManager.is_server)
                                                         NAF.connection.broadcastData("load_mp4", { url: local });
                                                 });
@@ -52,7 +52,7 @@ var pdfLoader = {
                                                     var local = $(this).attr('file');
                                                     pdfLoader.loadUrl(local);
                                                     $('#PDFLoaderDialog').attr("visible", "false");
-                                                    $('#PDFLoaderDialog').attr("position", "-8.63 -4000 -5.86");
+                                                    $('#PDFLoaderDialog').attr("position", "-8.44 4000 -3.58");
                                                 });
                                             }
                                             iter -= 0.2;
