@@ -84,7 +84,7 @@ app.use('/', function (req, res, next) {
         {
             res.sendStatus(401);
         }
-        // send 404 when cookie do not fit
+        // send 401 when cookie do not fit
     }
 
     next();
