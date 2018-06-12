@@ -112,9 +112,19 @@ var pdfLoader = {
 
         if (document.getElementById('melden_button') != null)
             document.getElementById('melden_button').addEventListener('click', function (evt) {
-                document.querySelector("#players-q").setAttribute("position", "0 0.2 0");
+                document.querySelector("#players-q").setAttribute("position", document.getElementById("player").components.position.data.x 
+                + " " 
+                + document.getElementById("players-q").components.position.data.y 
+                + " "
+                + document.getElementById("players-q").components.position.data.z);
+                
+
                 window.setTimeout(function () {
-                    document.querySelector("#players-q").setAttribute("position", "2000 0.2 0");
+                    document.querySelector("#players-q").setAttribute("position", 2000
+                + " " 
+                + document.getElementById("players-q").components.position.data.y 
+                + " "
+                + document.getElementById("players-q").components.position.data.z);
                 }, 5000);
             });
     },

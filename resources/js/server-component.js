@@ -187,23 +187,37 @@ function onGetPositionResponse(senderid, dataType, data, targetID) {
     if (senderid != NAF.clientId && serverFound == false) {
         window.clearInterval(findServerIntervalNumber);
         serverFound = true;
+        
+        var new_x = parseInt(data.position.split(' ')[0]);
+        var new_y = parseInt(data.position.split(' ')[1]);
+        var new_z = parseInt(data.position.split(' ')[2]);
+
         var el = document.getElementById("player");
         el.setAttribute("position", data.position);
         el.setAttribute("rotation", data.rotation);
+
+        var el_melden = document.getElementById("melden_button");
+        el_melden.setAttribute("position", (new_x - 1) + " " + (new_y - 0.5) + " " + new_z);
+
+        var el_logout = document.getElementById("logout_button");
+        el_logout.setAttribute("position", (new_x - 0.5) + " " + (new_y - 0.5) + " " + new_z);
+
+        document.getElementById("players-q").components.position.data.y = new_y + 0.7;
+        document.getElementById("players-q").components.position.data.z = new_z;
         var localPlayer = $("#android");
-        var localPlayerHead = $("#android-head");
+        var localPlayerHead = $("#player .head");
         var localCursorRing = $("#cursor_ring");
         if (!data.unvisible) {
             window.setTimeout(
                 function () {
                     if (data.color != "green")
-                        localPlayer.attr("collada-model", "url(resources/models/android/Android_" + data.color + ".dae);");
+                        localPlayer.attr("color", data.color);
                     localPlayer.attr("visible", "false");
                 }, 500);
             window.setTimeout(
                 function () {
                     if (data.color != "green")
-                        localPlayerHead.attr("collada-model", "url(resources/models/android/Android_head_" + data.color + ".dae);");
+                        localPlayerHead.attr("color", data.color);
                     localPlayerHead.attr("visible", "false");
                     localCursorRing.attr("visible", "true");
                     localCursorRing.attr("material", "color: " + data.color + "; shader: flat");
@@ -217,7 +231,10 @@ function onGetPositionResponse(senderid, dataType, data, targetID) {
                 }, 500);
         }
         //call network update
-        window.setTimeout(function () { document.getElementById("player").components.position.data.x = document.getElementById("player").components.position.data.x + 0.00001; }, 50);
+        window.setTimeout(
+            function () {
+                document.getElementById("player").components.position.data.x = document.getElementById("player").components.position.data.x + 0.00001;
+            }, 50);
     }
 }
 
