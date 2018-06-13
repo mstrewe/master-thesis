@@ -5821,12 +5821,17 @@ var Easyrtc = function() {
      *    );
      */
     this.sendData = function(destUser, msgType, msgData, ackHandler) {
+setTimeout(function(){
+try{
         if (peerConns[destUser] && peerConns[destUser].dataChannelReady) {
             self.sendDataP2P(destUser, msgType, msgData);
         }
         else {
             self.sendDataWS(destUser, msgType, msgData, ackHandler);
         }
+}catch(err) {
+    console.log('Send data failed. Display would hang now without this fix');
+}},1);
     };
 
     /**
