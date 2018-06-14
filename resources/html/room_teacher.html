@@ -24,12 +24,7 @@
 			pdfLoader.init();
 			initServerManager();
 
-			window.setInterval(
-				function () {
-					var rot = $('a-camera').attr('rotation');
-					$('#players-head').attr('rotation', rot.x + " " + rot.y + " " + rot.z);
-					$('#players-head').attr('position', '0 0 0');
-				}, 100);
+		
 		}
 		document.body.addEventListener('connected', function (evt) {
 			findServer();
@@ -91,29 +86,31 @@
 			<img id="right_asset" src="resources/images/right.jpg" />
 			<img id="upload_asset" src="resources/images/upload.png" />
 			<img id="uploadhint_asset" src="resources/images/uploadhint.jpg" />
-			<img id="video_header_asset" src="resources/images/video_header.jpg"/>
+			<img id="video_header_asset" src="resources/images/video_header.jpg" />
 		</a-assets>
 		<a-sky id="sky_entity" src="#sky" scale="0.5 0.5 0.5"></a-sky>
 
 		<a-entity id="player" networked="template:#avatar-template;showLocalTemplate:false;" position="0 0.4 0" wasd-controls>
 			<a-entity id="players-q" networked="template:#q-template;showLocalTemplate:false" rotation="0 90 0" position="2000 0.24 0"></a-entity>
 			<a-entity position="0 -1.6 0">
-				<a-camera></a-camera>
+				<a-camera>
+					<a-entity id="cursor_ring" cursor="fuse: true; fuseTimeout: 500" position="0 0 -0.5" geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
+					 material="color: black; shader: flat">
+						<a-animation begin="click" easing="ease-in" attribute="scale" dur="150" fill="forwards" from="0.1 0.1 0.1" to="1 1 1"></a-animation>
+						<a-animation begin="cursor-fusing" easing="ease-in" attribute="scale" dur="1500" fill="backwards" from="1 1 1" to="0.1 0.1 0.1"></a-animation>
+					</a-entity>
+				</a-camera>
 			</a-entity>
 			<a-entity id="players-head" networked="template:#avatar-head-template;showLocalTemplate:false" position="0 0 0">
 				<a-entity id="uploadhint" geometry="primitive: plane; width:3;height: 1;" position="2000 0 0" material="src:#uploadhint_asset;">
 				</a-entity>
-				<a-entity id="cursor_ring" cursor="fuse: true; fuseTimeout: 500" position="0 0 -0.5" geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
-				 material="color: black; shader: flat">
-					<a-animation begin="click" easing="ease-in" attribute="scale" dur="150" fill="forwards" from="0.1 0.1 0.1" to="1 1 1"></a-animation>
-					<a-animation begin="cursor-fusing" easing="ease-in" attribute="scale" dur="1500" fill="backwards" from="1 1 1" to="0.1 0.1 0.1"></a-animation>
-				</a-entity>
+
 			</a-entity>
 		</a-entity>
 		<!--<a-entity obj-model="obj: url(resources/models/island/island.obj);mtl: url(resources/models/island/island.mtl;" position="0 0 0"></a-entity> -->
-		<a-entity  id="vidio_header" geometry="primitive: plane; width: 3; height: 1;" position="-9.13 -0.19 -1.44" scale="0.1 0.1 0.1"
-		material="src:#video_header_asset;" rotation="-30 45 0"></a-entity>
-   
+		<a-entity id="vidio_header" geometry="primitive: plane; width: 3; height: 1;" position="-9.13 -0.19 -1.44" scale="0.1 0.1 0.1"
+		 material="src:#video_header_asset;" rotation="-30 45 0"></a-entity>
+
 		<a-entity event-sync id="play_button" geometry="primitive: plane; width: 1; height: 1;" position="-9.21	 -0.3 -1.30" scale="0.1 0.1 0.1"
 		 material="src:#play_asset;" rotation="-30 45 0"></a-entity>
 		<a-entity event-sync id="pause_button" geometry="primitive: plane; width: 1; height: 1;" position="-9.11 -0.3 -1.40" scale="0.1 0.1 0.1"
@@ -128,15 +125,15 @@
 
 		<a-entity static-sync material="shader: html; target: #htmlElement;fps:2;" position="-8.1 2.88 -6.7" rotation="0 45.836623610465864 0"
 		 scale="1 1 1" visible="true" id="WhiteBoard" mixin="null" geometry="height:4.56;width:8.74;primitive:plane"></a-entity>
-		<a-entity event-sync position="-7.40 -0.15 -4.33" rotation="0 10 0" scale="0.8 0.8 0.8" visible="true" id="pdf_next_page" material="src:#right_asset"
-		 geometry="primitive:plane"></a-entity>
-		<a-entity event-sync position="-9.52 -0.10 -3.87" rotation="0 10 0" scale="0.8 0.8 0.8" visible="true" id="pdf_previus_page" material="src:#left_asset"
-		 geometry="primitive:plane"></a-entity>
+		<a-entity event-sync position="-7.40 -0.15 -4.33" rotation="0 10 0" scale="0.8 0.8 0.8" visible="true" id="pdf_next_page"
+		 material="src:#right_asset" geometry="primitive:plane"></a-entity>
+		<a-entity event-sync position="-9.52 -0.10 -3.87" rotation="0 10 0" scale="0.8 0.8 0.8" visible="true" id="pdf_previus_page"
+		 material="src:#left_asset" geometry="primitive:plane"></a-entity>
 		<a-entity event-sync position="-8.49 -0.11 -4.11" rotation="0 10 0" visible="true" id="pdfDialogOpener" geometry="primitive:plane;width:1;height:0.5;"
 		 material="">
 			<a-text position="-0.3 0 0" color="black" value="Dateimenue" width="3"></a-text>
 		</a-entity>
-		
+
 
 		<a-entity id="PDFLoaderDialog" visible="false" rotation="0 10 0" position="-8.44 4000 -3.58">
 
